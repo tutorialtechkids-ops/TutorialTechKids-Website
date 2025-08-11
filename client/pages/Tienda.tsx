@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { ShoppingBag, Star, Check, Palette, Smartphone, Calendar, Download } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PaymentButton } from "../components/PaymentButton";
 
 export default function Tienda() {
+  const [showPayment, setShowPayment] = useState(false);
+
   const handlePurchase = () => {
-    // This will redirect to the customization form after payment
+    setShowPayment(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    setShowPayment(false);
+    // Redirect to customization form after successful payment
     window.location.href = "/planner-personalizado";
   };
 
@@ -167,6 +176,33 @@ export default function Tienda() {
           </div>
         </div>
       </section>
+
+      {/* Payment Modal */}
+      {showPayment && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="text-center mb-6">
+                <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <ShoppingBag className="h-6 w-6 text-primary" />
+                </div>
+                <h2 className="text-2xl font-bold text-foreground mb-2">
+                  Completar Compra
+                </h2>
+                <p className="text-muted-foreground">
+                  Planner Digital Personalizado
+                </p>
+              </div>
+
+              <PaymentButton
+                onSuccess={handlePaymentSuccess}
+                amount={10}
+                productName="Planner Digital Personalizado"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
