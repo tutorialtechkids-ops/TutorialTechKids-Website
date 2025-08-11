@@ -1,30 +1,118 @@
-import "./global.css";
-
-import { Toaster } from "@/components/ui/toaster";
-import { createRoot } from "react-dom/client";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { CookieBanner } from "./components/CookieBanner";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Privacidad from "./pages/Privacidad";
+import Terminos from "./pages/Terminos";
+import Cookies from "./pages/Cookies";
+import { PlaceholderPage } from "./components/PlaceholderPage";
+import { BookOpen, Phone, Users, Palette } from "lucide-react";
 
-const queryClient = new QueryClient();
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-background text-foreground flex flex-col">
+        <Header />
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/privacidad" element={<Privacidad />} />
+            <Route path="/terminos" element={<Terminos />} />
+            <Route path="/cookies" element={<Cookies />} />
+            
+            {/* Placeholder routes */}
+            <Route 
+              path="/tutoriales" 
+              element={
+                <PlaceholderPage 
+                  title="Tutoriales"
+                  description="Aprende paso a paso con nuestros tutoriales diseñados especialmente para niños y jóvenes."
+                  icon={<BookOpen className="h-12 w-12 text-primary" />}
+                />
+              } 
+            />
+            <Route 
+              path="/sobre-nosotros" 
+              element={
+                <PlaceholderPage 
+                  title="Sobre Nosotros"
+                  description="Conoce al equipo detrás de TutorialTechKids y nuestra historia."
+                  icon={<Users className="h-12 w-12 text-accent" />}
+                />
+              } 
+            />
+            <Route 
+              path="/contacto" 
+              element={
+                <PlaceholderPage 
+                  title="Contacto"
+                  description="¿Tienes preguntas o sugerencias? ¡Nos encantaría escucharte!"
+                  icon={<Phone className="h-12 w-12 text-primary" />}
+                />
+              } 
+            />
+            <Route 
+              path="/canva" 
+              element={
+                <PlaceholderPage 
+                  title="Diseño en Canva"
+                  description="Aprende a crear diseños increíbles con tutoriales paso a paso de Canva."
+                  icon={<Palette className="h-12 w-12 text-brand-purple" />}
+                />
+              } 
+            />
+            <Route 
+              path="/mini-hacks" 
+              element={
+                <PlaceholderPage 
+                  title="Mini-hacks"
+                  description="Descubre trucos geniales para aprovechar mejor tus apps y dispositivos favoritos."
+                  icon={<BookOpen className="h-12 w-12 text-accent" />}
+                />
+              } 
+            />
+            <Route 
+              path="/trucos" 
+              element={
+                <PlaceholderPage 
+                  title="Trucos Tecnológicos"
+                  description="Tips y consejos tecnológicos fáciles para hacer tu vida digital más eficiente."
+                  icon={<BookOpen className="h-12 w-12 text-primary" />}
+                />
+              } 
+            />
+            <Route 
+              path="/mision-vision" 
+              element={
+                <PlaceholderPage 
+                  title="Misión y Visión"
+                  description="Conoce más sobre nuestros objetivos y hacia dónde vamos como plataforma educativa."
+                  icon={<Users className="h-12 w-12 text-brand-purple" />}
+                />
+              } 
+            />
+            <Route 
+              path="/blog" 
+              element={
+                <PlaceholderPage 
+                  title="Blog"
+                  description="Artículos, noticias y contenido educativo sobre tecnología para jóvenes."
+                  icon={<BookOpen className="h-12 w-12 text-accent" />}
+                />
+              } 
+            />
+            
+            {/* Catch all route for 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+        <Footer />
+        <CookieBanner />
+      </div>
+    </BrowserRouter>
+  );
+}
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-createRoot(document.getElementById("root")!).render(<App />);
+export default App;
