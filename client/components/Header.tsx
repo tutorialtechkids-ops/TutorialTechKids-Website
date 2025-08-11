@@ -18,26 +18,32 @@ export function Header() {
           </Link>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="text-foreground hover:text-primary transition-colors font-medium"
             >
               Inicio
             </Link>
-            <Link 
-              to="/tutoriales" 
+            <Link
+              to="/tutoriales"
               className="text-foreground hover:text-primary transition-colors font-medium"
             >
               Tutoriales
             </Link>
-            <Link 
-              to="/sobre-nosotros" 
+            <Link
+              to="/tienda"
+              className="text-foreground hover:text-primary transition-colors font-medium"
+            >
+              Mi Tienda
+            </Link>
+            <Link
+              to="/sobre-nosotros"
               className="text-foreground hover:text-primary transition-colors font-medium"
             >
               Sobre nosotros
             </Link>
-            <Link 
-              to="/contacto" 
+            <Link
+              to="/contacto"
               className="text-foreground hover:text-primary transition-colors font-medium"
             >
               Contacto

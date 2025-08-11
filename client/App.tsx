@@ -7,6 +7,8 @@ import NotFound from "./pages/NotFound";
 import Privacidad from "./pages/Privacidad";
 import Terminos from "./pages/Terminos";
 import Cookies from "./pages/Cookies";
+import Tienda from "./pages/Tienda";
+import PlannerPersonalizado from "./pages/PlannerPersonalizado";
 import { PlaceholderPage } from "./components/PlaceholderPage";
 import { BookOpen, Phone, Users, Palette } from "lucide-react";
 
@@ -21,7 +23,9 @@ function App() {
             <Route path="/privacidad" element={<Privacidad />} />
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/cookies" element={<Cookies />} />
-            
+            <Route path="/tienda" element={<Tienda />} />
+            <Route path="/planner-personalizado" element={<PlannerPersonalizado />} />
+
             {/* Placeholder routes */}
             <Route 
               path="/tutoriales" 
