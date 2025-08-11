@@ -1,0 +1,560 @@
+import { useState } from "react";
+import { ArrowLeft, Upload, Check, Palette, Calendar, Download } from "lucide-react";
+import { Link } from "react-router-dom";
+
+export default function PlannerPersonalizado() {
+  const [formData, setFormData] = useState({
+    app: "",
+    customization: "",
+    plannerType: "",
+    plannerColor: "",
+    customPlannerColor: "",
+    paperStyle: "white",
+    customImage: null,
+    croppingBoxSize: 50,
+    imageOpacity: 50,
+    paperBackingColor: "ffffff",
+    headerBoxesColor: "f7d7f0",
+    dated: "",
+    startMonth: "january",
+    startDate: "",
+    tabColors: "rainbow",
+    customTabColors: "",
+    tabFontColor: "white",
+    tabTitles: "recommended",
+    customTabTitles: Array(12).fill(""),
+    dailyTimeStart: 6,
+    calendarLinks: "",
+    isNotRobot: false
+  });
+
+  const handleInputChange = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleCustomTabTitleChange = (index: number, value: string) => {
+    const newTitles = [...formData.customTabTitles];
+    newTitles[index] = value;
+    setFormData(prev => ({ ...prev, customTabTitles: newTitles }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.isNotRobot) {
+      alert("Por favor, confirma que no eres un robot");
+      return;
+    }
+    // Here you would process the form and generate the custom planner
+    alert("¡Formulario enviado! Tu planner personalizado será generado y enviado pronto.");
+  };
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-accent/5 via-white to-primary/5 py-8">
+      <div className="container mx-auto px-4 max-w-4xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <Link 
+            to="/tienda" 
+            className="inline-flex items-center space-x-2 text-primary hover:text-brand-blue-light transition-colors mb-6"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Volver a la tienda</span>
+          </Link>
+          
+          <div className="flex justify-center mb-4">
+            <div className="bg-accent/10 w-12 h-12 rounded-xl flex items-center justify-center">
+              <Palette className="h-6 w-6 text-accent" />
+            </div>
+          </div>
+          
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Personaliza tu Planner Digital
+          </h1>
+          <p className="text-muted-foreground">
+            Completa este formulario para crear tu planner completamente personalizado
+          </p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="bg-white rounded-2xl shadow-lg border border-border p-6 md:p-8">
+            
+            {/* App Selection */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">What app are you using?</h3>
+              <div className="space-y-3">
+                {[
+                  "Apple apps other than Goodnotes 6",
+                  "GoodNotes 6 (make sure you're using Safari browser and not a different browser)",
+                  "Penly for Android",
+                  "Other Android apps"
+                ].map((option, index) => (
+                  <label key={index} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="app"
+                      value={option}
+                      checked={formData.app === option}
+                      onChange={(e) => handleInputChange("app", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Customization Option */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Select customization option:</h3>
+              <div className="flex flex-col sm:flex-row gap-4">
+                {["Simple", "Advanced"].map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => handleInputChange("customization", option)}
+                    className={`px-6 py-3 rounded-xl font-medium transition-all ${
+                      formData.customization === option
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground hover:bg-primary/10"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Planner Type */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Full or minimalist planner</h3>
+              <div className="space-y-3">
+                {[
+                  "Full planner (give me everything!)",
+                  "Minimalist planner (no extra templates)"
+                ].map((option) => (
+                  <label key={option} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="plannerType"
+                      value={option}
+                      checked={formData.plannerType === option}
+                      onChange={(e) => handleInputChange("plannerType", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Planner Color */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Planner color:</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                {[
+                  { name: "Blush", color: "#F8D7DA" },
+                  { name: "Black", color: "#000000" },
+                  { name: "Blue", color: "#ADD8E6" },
+                  { name: "Green", color: "#90EE90" },
+                  { name: "Pink", color: "#FFB6C1" },
+                  { name: "Purple", color: "#DDA0DD" }
+                ].map((colorOption) => (
+                  <label key={colorOption.name} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="plannerColor"
+                      value={colorOption.name}
+                      checked={formData.plannerColor === colorOption.name}
+                      onChange={(e) => handleInputChange("plannerColor", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{colorOption.name}:</span>
+                    <div 
+                      className="w-6 h-6 rounded border border-border"
+                      style={{ backgroundColor: colorOption.color }}
+                    ></div>
+                  </label>
+                ))}
+              </div>
+              
+              <div className="space-y-3">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="plannerColor"
+                    value="custom"
+                    checked={formData.plannerColor === "custom"}
+                    onChange={(e) => handleInputChange("plannerColor", e.target.value)}
+                    className="text-primary focus:ring-primary"
+                  />
+                  <span className="text-foreground">Custom planner color</span>
+                </label>
+                {formData.plannerColor === "custom" && (
+                  <input
+                    type="text"
+                    placeholder="ffffff"
+                    value={formData.customPlannerColor}
+                    onChange={(e) => handleInputChange("customPlannerColor", e.target.value)}
+                    className="ml-6 px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                )}
+                <p className="text-sm text-muted-foreground ml-6">
+                  Find hex color codes <span className="text-primary">here</span>.
+                </p>
+              </div>
+            </div>
+
+            {/* Paper Style */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Paper Style:</h3>
+              <div className="space-y-3">
+                {["White", "Cream"].map((option) => (
+                  <label key={option} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="paperStyle"
+                      value={option.toLowerCase()}
+                      checked={formData.paperStyle === option.toLowerCase()}
+                      onChange={(e) => handleInputChange("paperStyle", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Custom Image Upload */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">
+                Upload a custom image (use a high resolution image - max 5MB):
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <button
+                    type="button"
+                    className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg transition-colors"
+                  >
+                    Choose File
+                  </button>
+                  <span className="text-sm text-muted-foreground">No file chosen</span>
+                </div>
+                
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">Cropping box size:</label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={formData.croppingBoxSize}
+                      onChange={(e) => handleInputChange("croppingBoxSize", parseInt(e.target.value))}
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">Image opacity:</label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={formData.imageOpacity}
+                      onChange={(e) => handleInputChange("imageOpacity", parseInt(e.target.value))}
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div className="flex space-x-4">
+                    <button type="button" className="text-primary hover:underline">Center horizontally</button>
+                    <button type="button" className="text-primary hover:underline">Center vertically</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Paper/Backing Color */}
+            <div className="mb-8">
+              <label className="block text-sm font-medium text-foreground mb-2">Paper/backing color:</label>
+              <input
+                type="text"
+                value={formData.paperBackingColor}
+                onChange={(e) => handleInputChange("paperBackingColor", e.target.value)}
+                className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+              <p className="text-sm text-muted-foreground mt-1">
+                Find hex color codes <span className="text-primary">here</span>
+              </p>
+            </div>
+
+            {/* Header Boxes Color */}
+            <div className="mb-8">
+              <label className="block text-sm font-medium text-foreground mb-2">Header boxes color:</label>
+              <div className="flex items-center space-x-3">
+                <input
+                  type="text"
+                  value={formData.headerBoxesColor}
+                  onChange={(e) => handleInputChange("headerBoxesColor", e.target.value)}
+                  className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+                <div 
+                  className="w-8 h-8 rounded border border-border"
+                  style={{ backgroundColor: `#${formData.headerBoxesColor}` }}
+                ></div>
+              </div>
+              <p className="text-sm text-muted-foreground mt-1">
+                Find hex color codes <span className="text-primary">here</span>
+              </p>
+            </div>
+
+            {/* Dated or Undated */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Dated or Undated:</h3>
+              <div className="space-y-3">
+                {[
+                  "Undated",
+                  "One year dated: 2024",
+                  "Two year dated: Jan 2024 - Dec 2025",
+                  "One year dated: 2025",
+                  "Two year dated: Jan 2025 - Dec 2026",
+                  "One year dated: 2026"
+                ].map((option) => (
+                  <label key={option} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="dated"
+                      value={option}
+                      checked={formData.dated === option}
+                      onChange={(e) => handleInputChange("dated", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Start Month */}
+            <div className="mb-8">
+              <label className="block text-sm font-medium text-foreground mb-2">Start month:</label>
+              <select
+                value={formData.startMonth}
+                onChange={(e) => handleInputChange("startMonth", e.target.value)}
+                className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                {[
+                  "January", "February", "March", "April", "May", "June",
+                  "July", "August", "September", "October", "November", "December"
+                ].map((month) => (
+                  <option key={month} value={month.toLowerCase()}>{month}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Start Date */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Start date:</h3>
+              <div className="space-y-3">
+                {["Monday", "Sunday"].map((option) => (
+                  <label key={option} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="startDate"
+                      value={option}
+                      checked={formData.startDate === option}
+                      onChange={(e) => handleInputChange("startDate", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Tab Colors */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Tab colors:</h3>
+              <div className="space-y-3">
+                {["Rainbow tabs", "Cream tabs"].map((option) => (
+                  <label key={option} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="tabColors"
+                      value={option.toLowerCase().replace(" ", "_")}
+                      checked={formData.tabColors === option.toLowerCase().replace(" ", "_")}
+                      onChange={(e) => handleInputChange("tabColors", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="tabColors"
+                    value="custom"
+                    checked={formData.tabColors === "custom"}
+                    onChange={(e) => handleInputChange("tabColors", e.target.value)}
+                    className="text-primary focus:ring-primary"
+                  />
+                  <span className="text-foreground">Custom tab colors</span>
+                </label>
+                {formData.tabColors === "custom" && (
+                  <input
+                    type="text"
+                    value={formData.customTabColors}
+                    onChange={(e) => handleInputChange("customTabColors", e.target.value)}
+                    className="ml-6 px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent w-full"
+                  />
+                )}
+              </div>
+            </div>
+
+            {/* Tab Font Color */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Tab font color:</h3>
+              <div className="space-y-3">
+                {["Black", "White"].map((option) => (
+                  <label key={option} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="tabFontColor"
+                      value={option.toLowerCase()}
+                      checked={formData.tabFontColor === option.toLowerCase()}
+                      onChange={(e) => handleInputChange("tabFontColor", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Tab Titles */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Tab titles and links:</h3>
+              <div className="space-y-3 mb-4">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="tabTitles"
+                    value="recommended"
+                    checked={formData.tabTitles === "recommended"}
+                    onChange={(e) => handleInputChange("tabTitles", e.target.value)}
+                    className="text-primary focus:ring-primary"
+                  />
+                  <span className="text-foreground">1-12 tabs with dividers (recommended for beginners):</span>
+                </label>
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="tabTitles"
+                    value="custom"
+                    checked={formData.tabTitles === "custom"}
+                    onChange={(e) => handleInputChange("tabTitles", e.target.value)}
+                    className="text-primary focus:ring-primary"
+                  />
+                  <span className="text-foreground">Custom tab titles and links:</span>
+                </label>
+              </div>
+
+              {formData.tabTitles === "custom" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {Array(12).fill(0).map((_, index) => (
+                    <div key={index} className="flex items-center space-x-2">
+                      <label className="text-sm font-medium text-foreground w-20">
+                        Tab name {index + 1}:
+                      </label>
+                      <input
+                        type="text"
+                        placeholder={`TAB ${index + 1}`}
+                        value={formData.customTabTitles[index]}
+                        onChange={(e) => handleCustomTabTitleChange(index, e.target.value)}
+                        className="flex-1 px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      />
+                      <select className="px-2 py-2 border border-border rounded-lg text-sm">
+                        <option>Standard divider page</option>
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Daily Time Start */}
+            <div className="mb-8">
+              <label className="block text-sm font-medium text-foreground mb-2">Daily time start:</label>
+              <select
+                value={formData.dailyTimeStart}
+                onChange={(e) => handleInputChange("dailyTimeStart", parseInt(e.target.value))}
+                className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                {Array.from({length: 24}, (_, i) => (
+                  <option key={i} value={i}>{i}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Calendar Links */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Apple and Google calendar links on daily pages:</h3>
+              <div className="space-y-3">
+                {[
+                  "None",
+                  "Apple calendar links for Apple devices",
+                  "Google calendar links for Apple devices",
+                  "Google calendar links for Android devices"
+                ].map((option) => (
+                  <label key={option} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="calendarLinks"
+                      value={option}
+                      checked={formData.calendarLinks === option}
+                      onChange={(e) => handleInputChange("calendarLinks", e.target.value)}
+                      className="text-primary focus:ring-primary"
+                    />
+                    <span className="text-foreground">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* reCAPTCHA */}
+            <div className="mb-8">
+              <p className="text-sm font-medium text-foreground mb-4">Tap tick box below to generate planner:</p>
+              <div className="flex items-center space-x-3">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.isNotRobot}
+                    onChange={(e) => handleInputChange("isNotRobot", e.target.checked)}
+                    className="text-primary focus:ring-primary"
+                  />
+                  <span className="text-foreground">I'm not a robot</span>
+                </label>
+                <div className="bg-muted/50 border border-border rounded p-2 text-xs text-muted-foreground">
+                  reCAPTCHA<br />
+                  Privacy - Terms
+                </div>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="text-center">
+              <button
+                type="submit"
+                disabled={!formData.isNotRobot}
+                className="bg-primary hover:bg-brand-blue-light disabled:bg-muted disabled:text-muted-foreground text-primary-foreground px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 mx-auto"
+              >
+                <Check className="h-5 w-5" />
+                <span>Generar mi Planner Personalizado</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  );
+}
