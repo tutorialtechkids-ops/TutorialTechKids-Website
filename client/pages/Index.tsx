@@ -67,7 +67,7 @@ export default function Index() {
                 Crear diseños creativos y profesionales usando las herramientas más populares.
               </p>
             </div>
-            
+
             <div className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
               <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                 <Smartphone className="h-6 w-6 text-primary" />
@@ -77,20 +77,20 @@ export default function Index() {
                 Trucos para aprovechar mejor tus aplicaciones y dispositivos favoritos.
               </p>
             </div>
-            
+
             <div className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
-              <div className="bg-brand-purple/10 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                <Lightbulb className="h-6 w-6 text-brand-purple" />
+              <div className="bg-accent/10 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                <Lightbulb className="h-6 w-6 text-accent" />
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-3">Trucos tecnológicos</h3>
               <p className="text-muted-foreground">
                 Consejos fáciles para el día a día que harán tu vida digital más eficiente.
               </p>
             </div>
-            
+
             <div className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
-              <div className="bg-green-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                <Cpu className="h-6 w-6 text-green-600" />
+              <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                <Cpu className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-3">Herramientas digitales</h3>
               <p className="text-muted-foreground">
@@ -110,7 +110,7 @@ export default function Index() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 bg-gradient-to-r from-primary/5 to-accent/5">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
@@ -127,7 +127,7 @@ export default function Index() {
       </section>
 
       {/* Vision Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-accent/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
@@ -144,7 +144,7 @@ export default function Index() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gradient-to-br from-accent/5 via-white to-primary/5">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Nuestros Valores</h2>
