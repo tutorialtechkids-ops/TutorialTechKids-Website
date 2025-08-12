@@ -153,40 +153,40 @@ export default function Index() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center space-y-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
-                <Users className="h-8 w-8 text-blue-600" />
+              <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
+                <Users className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Educación accesible</h3>
               <p className="text-muted-foreground">Tecnología para todos, sin complicaciones ni barreras.</p>
             </div>
-            
+
             <div className="text-center space-y-4">
-              <div className="bg-purple-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
-                <Sparkles className="h-8 w-8 text-purple-600" />
+              <div className="bg-accent/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
+                <Sparkles className="h-8 w-8 text-accent" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Innovación</h3>
               <p className="text-muted-foreground">Siempre a la vanguardia en tecnología y métodos de enseñanza.</p>
             </div>
-            
+
             <div className="text-center space-y-4">
-              <div className="bg-green-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
-                <Heart className="h-8 w-8 text-green-600" />
+              <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
+                <Heart className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Transparencia</h3>
               <p className="text-muted-foreground">Comunicación clara y honesta con nuestra comunidad.</p>
             </div>
-            
+
             <div className="text-center space-y-4">
-              <div className="bg-orange-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
-                <Lightbulb className="h-8 w-8 text-orange-600" />
+              <div className="bg-accent/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
+                <Lightbulb className="h-8 w-8 text-accent" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Creatividad</h3>
               <p className="text-muted-foreground">Estimular el pensamiento innovador y la solución de problemas.</p>
             </div>
-            
+
             <div className="text-center space-y-4 md:col-span-2 lg:col-span-1">
-              <div className="bg-red-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
-                <Shield className="h-8 w-8 text-red-600" />
+              <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto">
+                <Shield className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">Seguridad</h3>
               <p className="text-muted-foreground">Protección de la privacidad y confianza de nuestros usuarios.</p>
