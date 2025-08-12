@@ -30,15 +30,16 @@ export default function Index() {
               mini-hacks creativos y consejos tecnológicos diseñados especialmente para ti.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-primary hover:bg-brand-blue-light text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 shadow-xl">
-                <Sparkles className="h-5 w-5" />
-                <span>Comenzar a aprender</span>
-              </button>
-              <button className="bg-accent hover:bg-brand-purple-light text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 shadow-xl">
+            <div className="flex justify-center">
+              <a
+                href="https://www.youtube.com/@TutorialTechKids"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-accent hover:bg-brand-purple-light text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 shadow-xl"
+              >
                 <ArrowRight className="h-5 w-5" />
                 <span>Ver tutoriales</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>
