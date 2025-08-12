@@ -308,12 +308,11 @@ export default function PlannerPersonalizado() {
               </p>
             </div>
 
-            {/* Dated or Undated */}
+            {/* Dated Planner Options */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Dated or Undated:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">Select your planner dates:</h3>
               <div className="space-y-3">
                 {[
-                  "Undated",
                   "One year dated: 2024",
                   "Two year dated: Jan 2024 - Dec 2025",
                   "One year dated: 2025",
