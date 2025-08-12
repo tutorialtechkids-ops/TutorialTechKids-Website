@@ -4,14 +4,14 @@ export default function Index() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-navy/90 py-20">
+      <section className="bg-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="flex justify-center">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F75429be7c5c14d53944e7223414b1226%2Fc5904ce66f4149d4807a7346fef65976?format=webp&width=400"
                 alt="TutorialTechKids Logo"
-                className="h-32 w-auto animate-pulse hover:scale-105 transition-transform"
+                className="h-32 w-auto hover:scale-105 transition-transform"
               />
             </div>
 
@@ -19,18 +19,18 @@ export default function Index() {
               <span className="text-primary">TutorialTech</span>
               <span className="text-accent">Kids</span>
               <br />
-              <span className="text-2xl md:text-4xl text-primary/80 font-medium">
+              <span className="text-2xl md:text-4xl text-muted-foreground font-medium">
                 Tecnología para niños y jóvenes
               </span>
             </h1>
-            
-            <p className="text-lg md:text-xl text-primary/80 max-w-2xl mx-auto leading-relaxed">
+
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Aprende tecnología de forma divertida y sencilla. Tutoriales prácticos,
               mini-hacks creativos y consejos tecnológicos diseñados especialmente para ti.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-primary hover:bg-brand-blue-light text-brand-navy px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 shadow-xl">
+              <button className="bg-primary hover:bg-brand-blue-light text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 shadow-xl">
                 <Sparkles className="h-5 w-5" />
                 <span>Comenzar a aprender</span>
               </button>
