@@ -9,6 +9,8 @@ import Terminos from "./pages/Terminos";
 import Cookies from "./pages/Cookies";
 import Tienda from "./pages/Tienda";
 import PlannerPersonalizado from "./pages/PlannerPersonalizado";
+import RedesSociales from "./pages/RedesSociales";
+import Gracias from "./pages/Gracias";
 import { PlaceholderPage } from "./components/PlaceholderPage";
 import { BookOpen, Phone, Users, Palette } from "lucide-react";
 
@@ -25,6 +27,8 @@ function App() {
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/tienda" element={<Tienda />} />
             <Route path="/planner-personalizado" element={<PlannerPersonalizado />} />
+            <Route path="/redes-sociales" element={<RedesSociales />} />
+            <Route path="/gracias" element={<Gracias />} />
 
             {/* Placeholder routes */}
             <Route 
