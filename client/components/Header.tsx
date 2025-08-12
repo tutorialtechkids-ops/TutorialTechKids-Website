@@ -24,10 +24,10 @@ export function Header() {
               Inicio
             </Link>
             <Link
-              to="/tutoriales"
+              to="/redes-sociales"
               className="text-foreground hover:text-primary transition-colors font-medium"
             >
-              Tutoriales
+              Redes Sociales
             </Link>
             <Link
               to="/tienda"
@@ -50,9 +50,14 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <button className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg">
+            <a
+              href="https://www.youtube.com/@TutorialTechKids"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg inline-block"
+            >
               Comenzar
-            </button>
+            </a>
           </div>
         </div>
       </div>
