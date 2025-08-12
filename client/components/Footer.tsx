@@ -8,11 +8,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="relative">
-                <Brain className="h-6 w-6 text-primary" />
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-accent rounded-full opacity-75"></div>
-              </div>
-              <span className="text-lg font-bold text-primary">TutorialTechKids</span>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F75429be7c5c14d53944e7223414b1226%2F335b8a9d39094c17b6860854819efdd4?format=webp&width=150"
+                alt="TutorialTechKids Logo"
+                className="h-8 w-auto"
+              />
             </div>
             <p className="text-sm text-muted-foreground">
               Educación tecnológica accesible y divertida para niños y jóvenes hispanohablantes.
@@ -44,7 +44,9 @@ export function Footer() {
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-2 text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>hola@tutorialtechkids.com</span>
+                <a href="mailto:tutorialtechkids@gmail.com" className="hover:text-primary transition-colors">
+                  tutorialtechkids@gmail.com
+                </a>
               </div>
               <div className="flex items-center space-x-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />

@@ -8,12 +8,11 @@ export function Header() {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <Brain className="h-8 w-8 text-primary group-hover:text-brand-blue-light transition-colors" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full opacity-75"></div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-primary">TutorialTechKids</span>
-              <span className="text-xs text-muted-foreground">Tecnología para niños</span>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F75429be7c5c14d53944e7223414b1226%2Fc5904ce66f4149d4807a7346fef65976?format=webp&width=200"
+                alt="TutorialTechKids Logo"
+                className="h-12 w-auto group-hover:scale-105 transition-transform"
+              />
             </div>
           </Link>
           
