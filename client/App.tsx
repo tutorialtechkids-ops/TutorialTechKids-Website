@@ -11,6 +11,8 @@ import Tienda from "./pages/Tienda";
 import PlannerPersonalizado from "./pages/PlannerPersonalizado";
 import RedesSociales from "./pages/RedesSociales";
 import Gracias from "./pages/Gracias";
+import Contacto from "./pages/Contacto";
+import SobreNosotros from "./pages/SobreNosotros";
 import { PlaceholderPage } from "./components/PlaceholderPage";
 import { BookOpen, Phone, Users, Palette } from "lucide-react";
 
@@ -29,6 +31,7 @@ function App() {
             <Route path="/planner-personalizado" element={<PlannerPersonalizado />} />
             <Route path="/redes-sociales" element={<RedesSociales />} />
             <Route path="/gracias" element={<Gracias />} />
+            <Route path="/contacto" element={<Contacto />} />
 
             {/* Placeholder routes */}
             <Route 
@@ -41,22 +44,13 @@ function App() {
                 />
               } 
             />
-            <Route 
-              path="/sobre-nosotros" 
-              element={
-                <PlaceholderPage 
-                  title="Sobre Nosotros"
-                  description="Conoce al equipo detrás de TutorialTechKids y nuestra historia."
-                  icon={<Users className="h-12 w-12 text-accent" />}
-                />
-              } 
-            />
+            <Route path="/sobre-nosotros" element={<SobreNosotros />} />
             <Route 
               path="/contacto" 
               element={
                 <PlaceholderPage 
                   title="Contacto"
-                  description="¿Tienes preguntas o sugerencias? ¡Nos encantaría escucharte!"
+                  description="¿Tienes preguntas o sugerencias? ¡Nos encantar��a escucharte!"
                   icon={<Phone className="h-12 w-12 text-primary" />}
                 />
               } 
