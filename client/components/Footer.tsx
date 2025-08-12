@@ -48,10 +48,6 @@ export function Footer() {
                   tutorialtechkids@gmail.com
                 </a>
               </div>
-              <div className="flex items-center space-x-2 text-muted-foreground">
-                <MapPin className="h-4 w-4" />
-                <span>América Latina</span>
-              </div>
             </div>
           </div>
         </div>

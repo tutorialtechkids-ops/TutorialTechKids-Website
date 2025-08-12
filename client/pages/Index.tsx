@@ -1,5 +1,4 @@
 import { Brain, Target, Eye, Heart, Shield, Lightbulb, Users, Sparkles, Palette, Smartphone, Cpu, ArrowRight } from "lucide-react";
-import { SocialMediaSection } from "../components/SocialMediaSection";
 
 export default function Index() {
   return (
@@ -195,9 +194,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
-      {/* Social Media Section */}
-      <SocialMediaSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-primary">
