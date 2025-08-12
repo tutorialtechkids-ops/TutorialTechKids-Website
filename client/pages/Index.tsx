@@ -4,36 +4,37 @@ export default function Index() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/5 via-white to-accent/5 py-20">
+      <section className="bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-navy/90 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <div className="flex justify-center">
-              <div className="relative">
-                <Brain className="h-20 w-20 text-primary" />
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full opacity-75 animate-pulse"></div>
-                <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-brand-purple rounded-full opacity-60"></div>
-              </div>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F75429be7c5c14d53944e7223414b1226%2Fc5904ce66f4149d4807a7346fef65976?format=webp&width=400"
+                alt="TutorialTechKids Logo"
+                className="h-32 w-auto animate-pulse hover:scale-105 transition-transform"
+              />
             </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-              <span className="text-primary">TutorialTechKids</span>
+
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              <span className="text-primary">TutorialTech</span>
+              <span className="text-accent">Kids</span>
               <br />
-              <span className="text-2xl md:text-4xl text-muted-foreground font-medium">
+              <span className="text-2xl md:text-4xl text-primary/80 font-medium">
                 Tecnología para niños y jóvenes
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Aprende tecnología de forma divertida y sencilla. Tutoriales prácticos, 
+            <p className="text-lg md:text-xl text-primary/80 max-w-2xl mx-auto leading-relaxed">
+              Aprende tecnología de forma divertida y sencilla. Tutoriales prácticos,
               mini-hacks creativos y consejos tecnológicos diseñados especialmente para ti.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2">
+              <button className="bg-primary hover:bg-brand-blue-light text-brand-navy px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 shadow-xl">
                 <Sparkles className="h-5 w-5" />
                 <span>Comenzar a aprender</span>
               </button>
-              <button className="bg-accent hover:bg-brand-purple-light text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2">
+              <button className="bg-accent hover:bg-brand-purple-light text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 shadow-xl">
                 <ArrowRight className="h-5 w-5" />
                 <span>Ver tutoriales</span>
               </button>
