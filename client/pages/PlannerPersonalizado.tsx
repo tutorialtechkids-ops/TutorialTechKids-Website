@@ -46,7 +46,7 @@ export default function PlannerPersonalizado() {
       return;
     }
     // Here you would process the form and generate the custom planner
-    alert("¡Formulario enviado! Tu planner personalizado será generado y enviado pronto.");
+    window.location.href = "/gracias";
   };
 
   return (
