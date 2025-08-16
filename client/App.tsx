@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { CookieBanner } from "./components/CookieBanner";
+import { UserProvider } from "./contexts/UserContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Privacidad from "./pages/Privacidad";
@@ -50,7 +51,7 @@ function App() {
               element={
                 <PlaceholderPage 
                   title="Contacto"
-                  description="¿Tienes preguntas o sugerencias? ¡Nos encantar��a escucharte!"
+                  description="¿Tienes preguntas o sugerencias? ¡Nos encantaría escucharte!"
                   icon={<Phone className="h-12 w-12 text-primary" />}
                 />
               } 
