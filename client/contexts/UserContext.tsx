@@ -19,8 +19,8 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 // Admin emails - in production this would come from database
 const ADMIN_EMAILS = [
-  'tutorialtechkids@gmail.com',
-  'admin@tutorialtechkids.com',
+  'belenthiago516@gmail.com',
+  'thiagobelent@icloud.com',
   // Add more admin emails as needed
 ];
 
