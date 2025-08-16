@@ -60,19 +60,19 @@ export default function Contacto() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.name.trim() || !formData.message.trim()) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       alert("Por favor, completa todos los campos.");
       return;
     }
 
     if (!captchaCompleted) {
-      if (!showFallbackCaptcha && !recaptchaLoaded) {
-        setShowFallbackCaptcha(true);
-        return;
-      }
-      alert("Por favor, completa la verificación de seguridad.");
+      alert("Por favor, completa la verificación reCAPTCHA.");
       return;
     }
+
+    // Generate bot response
+    const response = generateBotResponse(formData.name, formData.message);
+    setBotResponse(response);
 
     // Simulate form submission
     setSubmitted(true);
@@ -99,11 +99,13 @@ export default function Contacto() {
             <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-6">
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Bot className="h-6 w-6 text-primary" />
-                <span className="font-semibold text-foreground">Bot de Soporte Automático</span>
+                <span className="font-semibold text-foreground">Respuesta Automática del Bot</span>
               </div>
-              <p className="text-muted-foreground text-sm">
-                Nuestro bot inteligente procesará tu mensaje y te enviará una respuesta 
-                personalizada en las próximas horas. ¡Gracias por tu paciencia!
+              <div className="bg-white rounded-xl p-4 border-l-4 border-primary mb-4">
+                <p className="text-foreground italic">"{botResponse}"</p>
+              </div>
+              <p className="text-muted-foreground text-sm text-center">
+                También hemos enviado tu consulta a nuestro equipo humano para una respuesta más detallada.
               </p>
             </div>
 
@@ -173,6 +175,21 @@ export default function Contacto() {
                 />
               </div>
 
+              {/* Email Field */}
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Tu Correo Electrónico *
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  placeholder="ejemplo@correo.com"
+                  className="w-full px-4 py-3 border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  required
+                />
+              </div>
+
               {/* Message Field */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
@@ -188,7 +205,7 @@ export default function Contacto() {
                 />
               </div>
 
-              {/* Captcha Section */}
+              {/* Google reCAPTCHA */}
               <div className="space-y-4">
                 <div className="bg-muted/50 rounded-xl p-4">
                   <div className="flex items-start space-x-3">
@@ -198,80 +215,16 @@ export default function Contacto() {
                       <p className="text-muted-foreground">
                         {captchaCompleted
                           ? "✅ Verificación completada exitosamente"
-                          : "Para evitar spam, completa la verificación antes de enviar tu mensaje."
+                          : "Completa el reCAPTCHA para enviar tu mensaje"
                         }
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {!captchaCompleted && (
-                  <div className="space-y-4">
-                    {/* Google reCAPTCHA */}
-                    {!showFallbackCaptcha && (
-                      <div className="flex flex-col items-center space-y-3">
-                        <div id="contact-recaptcha"></div>
-                        <button
-                          type="button"
-                          onClick={() => setShowFallbackCaptcha(true)}
-                          className="text-sm text-primary hover:underline"
-                        >
-                          ¿Problemas con reCAPTCHA? Usar verificación alternativa
-                        </button>
-                      </div>
-                    )}
-
-                    {/* Fallback Puzzle Captcha */}
-                    {showFallbackCaptcha && (
-                      <div className="border-2 border-primary/20 rounded-xl p-6 bg-gradient-to-br from-primary/5 to-accent/5">
-                        <div className="text-center mb-4">
-                          <h4 className="text-lg font-semibold text-foreground mb-2">Puzzle de Verificación</h4>
-                          <p className="text-sm text-muted-foreground">
-                            Selecciona todas las imágenes que contienen <strong className="text-primary">carros 🚗</strong>
-                          </p>
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-3 mb-6">
-                          {captchaImages.map((image) => (
-                            <button
-                              key={image.id}
-                              type="button"
-                              onClick={() => handleImageClick(image.id)}
-                              className={`aspect-square border-2 rounded-xl flex items-center justify-center text-4xl transition-all hover:scale-105 ${
-                                selectedImages.includes(image.id)
-                                  ? "border-primary bg-primary/10 scale-95 shadow-md"
-                                  : "border-gray-200 hover:border-primary/50"
-                              }`}
-                            >
-                              {image.emoji}
-                            </button>
-                          ))}
-                        </div>
-
-                        <div className="flex space-x-3">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setShowFallbackCaptcha(false);
-                              setSelectedImages([]);
-                            }}
-                            className="flex-1 bg-muted hover:bg-muted/80 text-muted-foreground py-3 px-4 rounded-xl font-medium transition-colors"
-                          >
-                            Usar reCAPTCHA
-                          </button>
-                          <button
-                            type="button"
-                            onClick={verifyFallbackCaptcha}
-                            disabled={selectedImages.length === 0}
-                            className="flex-1 bg-primary hover:bg-brand-blue-light disabled:bg-muted disabled:text-muted-foreground text-white py-3 px-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg"
-                          >
-                            Verificar
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
+                <div className="flex justify-center">
+                  <div id="contact-recaptcha"></div>
+                </div>
               </div>
 
               {/* Submit Button */}
