@@ -10,36 +10,16 @@ declare global {
 export default function Contacto() {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     message: ""
   });
   const [captchaCompleted, setCaptchaCompleted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  const [showFallbackCaptcha, setShowFallbackCaptcha] = useState(false);
-
-  // Fallback captcha images
-  const [captchaImages] = useState([
-    { id: 1, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 2, emoji: "🏠", name: "house", isCorrect: false },
-    { id: 3, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 4, emoji: "🌳", name: "tree", isCorrect: false },
-    { id: 5, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 6, emoji: "🎈", name: "balloon", isCorrect: false },
-    { id: 7, emoji: "🏠", name: "house", isCorrect: false },
-    { id: 8, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 9, emoji: "🌳", name: "tree", isCorrect: false }
-  ]);
-  const [selectedImages, setSelectedImages] = useState<number[]>([]);
+  const [botResponse, setBotResponse] = useState("");
 
   useEffect(() => {
-    let recaptchaCheckCount = 0;
-    const maxRetries = 50; // 5 seconds max
-
     const checkRecaptcha = () => {
-      recaptchaCheckCount++;
-
       if (window.grecaptcha && window.grecaptcha.render) {
-        setRecaptchaLoaded(true);
         try {
           setTimeout(() => {
             const container = document.getElementById('contact-recaptcha');
@@ -48,60 +28,33 @@ export default function Contacto() {
                 'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
                 'callback': (token: string) => {
                   setCaptchaCompleted(true);
-                  window.dispatchEvent(new CustomEvent('recaptchaCompleted', { detail: token }));
                 }
               });
             }
-          }, 200);
+          }, 500);
         } catch (error) {
-          console.log('reCAPTCHA failed, showing fallback');
-          setShowFallbackCaptcha(true);
+          console.log('reCAPTCHA failed to load');
         }
-      } else if (recaptchaCheckCount < maxRetries) {
-        setTimeout(checkRecaptcha, 100);
       } else {
-        // Fallback to custom captcha if reCAPTCHA doesn't load
-        console.log('reCAPTCHA timeout, showing fallback');
-        setShowFallbackCaptcha(true);
+        setTimeout(checkRecaptcha, 100);
       }
     };
 
-    const handleRecaptchaComplete = (event: any) => {
-      setCaptchaCompleted(!!event.detail);
-    };
-
-    window.addEventListener('recaptchaCompleted', handleRecaptchaComplete);
     checkRecaptcha();
-
-    return () => {
-      window.removeEventListener('recaptchaCompleted', handleRecaptchaComplete);
-    };
   }, []);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleImageClick = (imageId: number) => {
-    if (selectedImages.includes(imageId)) {
-      setSelectedImages(prev => prev.filter(id => id !== imageId));
-    } else {
-      setSelectedImages(prev => [...prev, imageId]);
-    }
-  };
-
-  const verifyFallbackCaptcha = () => {
-    const correctImages = captchaImages.filter(img => img.isCorrect).map(img => img.id);
-    const isCorrect = selectedImages.length === correctImages.length &&
-                     selectedImages.every(id => correctImages.includes(id));
-
-    if (isCorrect) {
-      setCaptchaCompleted(true);
-      setShowFallbackCaptcha(false);
-    } else {
-      alert("Por favor, selecciona solo los carros. Inténtalo de nuevo.");
-      setSelectedImages([]);
-    }
+  const generateBotResponse = (name: string, message: string) => {
+    const responses = [
+      `¡Hola ${name}! 🤖 Gracias por contactar TutorialTechKids. He recibido tu mensaje sobre "${message.substring(0, 50)}..." y lo he enviado a nuestro equipo.`,
+      `¡Saludos ${name}! 👋 Tu consulta ha sido registrada exitosamente. Nuestro equipo revisará tu mensaje y te responderá pronto.`,
+      `¡Hola ${name}! ✨ Mensaje recibido. Nos comunicaremos contigo en las próximas 24 horas para ayudarte con tu consulta.`,
+      `¡Hi ${name}! 🚀 Tu mensaje sobre tecnología ha llegado al lugar correcto. Nuestros expertos te responderán muy pronto.`
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
   };
 
   const handleSubmit = (e: React.FormEvent) => {
