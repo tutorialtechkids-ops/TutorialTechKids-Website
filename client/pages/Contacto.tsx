@@ -20,19 +20,34 @@ export default function Contacto() {
     const checkRecaptcha = () => {
       if (window.grecaptcha) {
         setRecaptchaLoaded(true);
+        // Render the reCAPTCHA when loaded
+        setTimeout(() => {
+          if (window.grecaptcha && window.grecaptcha.render) {
+            window.grecaptcha.render('contact-recaptcha', {
+              'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
+              'callback': 'onRecaptchaChange'
+            });
+          }
+        }, 500);
       } else {
         setTimeout(checkRecaptcha, 100);
       }
     };
+
+    const handleRecaptchaComplete = (event: any) => {
+      setCaptchaCompleted(!!event.detail);
+    };
+
+    window.addEventListener('recaptchaCompleted', handleRecaptchaComplete);
     checkRecaptcha();
+
+    return () => {
+      window.removeEventListener('recaptchaCompleted', handleRecaptchaComplete);
+    };
   }, []);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const onRecaptchaChange = (token: string | null) => {
-    setCaptchaCompleted(!!token);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -176,16 +191,9 @@ export default function Contacto() {
                   </div>
                 </div>
 
-                {recaptchaLoaded && (
-                  <div className="flex justify-center">
-                    <div
-                      className="g-recaptcha"
-                      data-sitekey="6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb"
-                      data-action="CONTACT"
-                      data-callback="onRecaptchaChange"
-                    ></div>
-                  </div>
-                )}
+                <div className="flex justify-center">
+                  <div id="contact-recaptcha"></div>
+                </div>
               </div>
 
               {/* Submit Button */}

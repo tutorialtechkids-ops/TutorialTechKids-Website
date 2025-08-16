@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Upload, Check, Palette, Calendar, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 
+declare global {
+  interface Window {
+    grecaptcha: any;
+    recaptchaToken: string;
+  }
+}
+
 export default function PlannerPersonalizado() {
+  const [recaptchaCompleted, setRecaptchaCompleted] = useState(false);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
   const [formData, setFormData] = useState({
     app: "",
     customization: "",
@@ -39,10 +49,40 @@ export default function PlannerPersonalizado() {
     setFormData(prev => ({ ...prev, customTabTitles: newTitles }));
   };
 
+  useEffect(() => {
+    const checkRecaptcha = () => {
+      if (window.grecaptcha) {
+        setRecaptchaLoaded(true);
+        // Render the reCAPTCHA when loaded
+        setTimeout(() => {
+          if (window.grecaptcha && window.grecaptcha.render) {
+            window.grecaptcha.render('planner-recaptcha', {
+              'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
+              'callback': 'onRecaptchaChange'
+            });
+          }
+        }, 500);
+      } else {
+        setTimeout(checkRecaptcha, 100);
+      }
+    };
+
+    const handleRecaptchaComplete = (event: any) => {
+      setRecaptchaCompleted(!!event.detail);
+    };
+
+    window.addEventListener('recaptchaCompleted', handleRecaptchaComplete);
+    checkRecaptcha();
+
+    return () => {
+      window.removeEventListener('recaptchaCompleted', handleRecaptchaComplete);
+    };
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.isNotRobot) {
-      alert("Por favor, confirma que no eres un robot");
+    if (!recaptchaCompleted) {
+      alert("Por favor, completa la verificación reCAPTCHA");
       return;
     }
     // Here you would process the form and generate the custom planner
@@ -566,23 +606,11 @@ export default function PlannerPersonalizado() {
               </div>
             </div>
 
-            {/* reCAPTCHA */}
+            {/* Google reCAPTCHA */}
             <div className="mb-8">
-              <p className="text-sm font-medium text-foreground mb-4">Tap tick box below to generate planner:</p>
-              <div className="flex items-center space-x-3">
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.isNotRobot}
-                    onChange={(e) => handleInputChange("isNotRobot", e.target.checked)}
-                    className="text-primary focus:ring-primary"
-                  />
-                  <span className="text-foreground">I'm not a robot</span>
-                </label>
-                <div className="bg-muted/50 border border-border rounded p-2 text-xs text-muted-foreground">
-                  reCAPTCHA<br />
-                  Privacy - Terms
-                </div>
+              <p className="text-sm font-medium text-foreground mb-4">Completa la verificación para generar tu planner:</p>
+              <div className="flex justify-center">
+                <div id="planner-recaptcha"></div>
               </div>
             </div>
 
@@ -590,7 +618,7 @@ export default function PlannerPersonalizado() {
             <div className="text-center">
               <button
                 type="submit"
-                disabled={!formData.isNotRobot}
+                disabled={!recaptchaCompleted}
                 className="bg-primary hover:bg-brand-blue-light disabled:bg-muted disabled:text-muted-foreground text-primary-foreground px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 mx-auto"
               >
                 <Check className="h-5 w-5" />
