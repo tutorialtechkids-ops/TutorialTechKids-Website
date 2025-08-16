@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Brain } from "lucide-react";
+import { Brain, User, LogOut, Crown } from "lucide-react";
+import { useUser } from "../contexts/UserContext";
+import { LoginForm } from "./LoginForm";
 
 export function Header() {
   return (
@@ -50,14 +53,44 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <a
-              href="https://www.youtube.com/@TutorialTechKids"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg inline-block"
-            >
-              Comenzar
-            </a>
+            {isAuthenticated() ? (
+              <div className="flex items-center space-x-3">
+                {isAdmin() && (
+                  <div className="flex items-center space-x-1 bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">
+                    <Crown className="h-4 w-4" />
+                    <span>Admin</span>
+                  </div>
+                )}
+                <div className="flex items-center space-x-2 text-foreground">
+                  <User className="h-4 w-4" />
+                  <span className="font-medium">{user?.name}</span>
+                </div>
+                <button
+                  onClick={logout}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  title="Cerrar sesión"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-3">
+                <button
+                  onClick={() => setShowLogin(true)}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  Iniciar Sesión
+                </button>
+                <a
+                  href="https://www.youtube.com/@TutorialTechKids"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg inline-block"
+                >
+                  Comenzar
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>
