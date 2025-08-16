@@ -12,6 +12,21 @@ declare global {
 export default function PlannerPersonalizado() {
   const [recaptchaCompleted, setRecaptchaCompleted] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const [showFallbackCaptcha, setShowFallbackCaptcha] = useState(false);
+
+  // Fallback captcha images
+  const [captchaImages] = useState([
+    { id: 1, emoji: "🚗", name: "car", isCorrect: true },
+    { id: 2, emoji: "🏠", name: "house", isCorrect: false },
+    { id: 3, emoji: "🚗", name: "car", isCorrect: true },
+    { id: 4, emoji: "🌳", name: "tree", isCorrect: false },
+    { id: 5, emoji: "🚗", name: "car", isCorrect: true },
+    { id: 6, emoji: "🎈", name: "balloon", isCorrect: false },
+    { id: 7, emoji: "🏠", name: "house", isCorrect: false },
+    { id: 8, emoji: "🚗", name: "car", isCorrect: true },
+    { id: 9, emoji: "🌳", name: "tree", isCorrect: false }
+  ]);
+  const [selectedImages, setSelectedImages] = useState<number[]>([]);
 
   const [formData, setFormData] = useState({
     app: "",
@@ -49,21 +64,60 @@ export default function PlannerPersonalizado() {
     setFormData(prev => ({ ...prev, customTabTitles: newTitles }));
   };
 
+  const handleImageClick = (imageId: number) => {
+    if (selectedImages.includes(imageId)) {
+      setSelectedImages(prev => prev.filter(id => id !== imageId));
+    } else {
+      setSelectedImages(prev => [...prev, imageId]);
+    }
+  };
+
+  const verifyFallbackCaptcha = () => {
+    const correctImages = captchaImages.filter(img => img.isCorrect).map(img => img.id);
+    const isCorrect = selectedImages.length === correctImages.length &&
+                     selectedImages.every(id => correctImages.includes(id));
+
+    if (isCorrect) {
+      setRecaptchaCompleted(true);
+      setShowFallbackCaptcha(false);
+    } else {
+      alert("Por favor, selecciona solo los carros. Inténtalo de nuevo.");
+      setSelectedImages([]);
+    }
+  };
+
   useEffect(() => {
+    let recaptchaCheckCount = 0;
+    const maxRetries = 50; // 5 seconds max
+
     const checkRecaptcha = () => {
-      if (window.grecaptcha) {
+      recaptchaCheckCount++;
+
+      if (window.grecaptcha && window.grecaptcha.render) {
         setRecaptchaLoaded(true);
-        // Render the reCAPTCHA when loaded
-        setTimeout(() => {
-          if (window.grecaptcha && window.grecaptcha.render) {
-            window.grecaptcha.render('planner-recaptcha', {
-              'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
-              'callback': 'onRecaptchaChange'
-            });
-          }
-        }, 500);
-      } else {
+        try {
+          setTimeout(() => {
+            const container = document.getElementById('planner-recaptcha');
+            if (container && !container.innerHTML) {
+              window.grecaptcha.render('planner-recaptcha', {
+                'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
+                'callback': (token: string) => {
+                  setRecaptchaCompleted(true);
+                  window.dispatchEvent(new CustomEvent('recaptchaCompleted', { detail: token }));
+                }
+              });
+            }
+          }, 200);
+        } catch (error) {
+          console.log('reCAPTCHA failed, showing fallback');
+          setShowFallbackCaptcha(true);
+        }
+      } else if (recaptchaCheckCount < maxRetries) {
         setTimeout(checkRecaptcha, 100);
+      } else {
+        // Fallback to custom captcha if reCAPTCHA doesn't load
+        console.log('reCAPTCHA timeout, showing fallback');
+        setShowFallbackCaptcha(true);
       }
     };
 
@@ -82,7 +136,11 @@ export default function PlannerPersonalizado() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!recaptchaCompleted) {
-      alert("Por favor, completa la verificación reCAPTCHA");
+      if (!showFallbackCaptcha && !recaptchaLoaded) {
+        setShowFallbackCaptcha(true);
+        return;
+      }
+      alert("Por favor, completa la verificación de seguridad");
       return;
     }
     // Here you would process the form and generate the custom planner
@@ -606,12 +664,82 @@ export default function PlannerPersonalizado() {
               </div>
             </div>
 
-            {/* Google reCAPTCHA */}
+            {/* Captcha Section */}
             <div className="mb-8">
-              <p className="text-sm font-medium text-foreground mb-4">Completa la verificación para generar tu planner:</p>
-              <div className="flex justify-center">
-                <div id="planner-recaptcha"></div>
-              </div>
+              <p className="text-sm font-medium text-foreground mb-4">
+                {recaptchaCompleted
+                  ? "✅ Verificación completada - ¡Listo para generar tu planner!"
+                  : "Completa la verificación para generar tu planner:"
+                }
+              </p>
+
+              {!recaptchaCompleted && (
+                <div className="space-y-4">
+                  {/* Google reCAPTCHA */}
+                  {!showFallbackCaptcha && (
+                    <div className="flex flex-col items-center space-y-3">
+                      <div id="planner-recaptcha"></div>
+                      <button
+                        type="button"
+                        onClick={() => setShowFallbackCaptcha(true)}
+                        className="text-sm text-primary hover:underline"
+                      >
+                        ¿Problemas con reCAPTCHA? Usar verificación alternativa
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Fallback Puzzle Captcha */}
+                  {showFallbackCaptcha && (
+                    <div className="border-2 border-primary/20 rounded-xl p-6 bg-gradient-to-br from-primary/5 to-accent/5">
+                      <div className="text-center mb-4">
+                        <h4 className="text-lg font-semibold text-foreground mb-2">Puzzle de Verificación</h4>
+                        <p className="text-sm text-muted-foreground">
+                          Selecciona todas las imágenes que contienen <strong className="text-primary">carros 🚗</strong>
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-3 mb-6">
+                        {captchaImages.map((image) => (
+                          <button
+                            key={image.id}
+                            type="button"
+                            onClick={() => handleImageClick(image.id)}
+                            className={`aspect-square border-2 rounded-xl flex items-center justify-center text-4xl transition-all hover:scale-105 ${
+                              selectedImages.includes(image.id)
+                                ? "border-primary bg-primary/10 scale-95 shadow-md"
+                                : "border-gray-200 hover:border-primary/50"
+                            }`}
+                          >
+                            {image.emoji}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="flex space-x-3">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowFallbackCaptcha(false);
+                            setSelectedImages([]);
+                          }}
+                          className="flex-1 bg-muted hover:bg-muted/80 text-muted-foreground py-3 px-4 rounded-xl font-medium transition-colors"
+                        >
+                          Usar reCAPTCHA
+                        </button>
+                        <button
+                          type="button"
+                          onClick={verifyFallbackCaptcha}
+                          disabled={selectedImages.length === 0}
+                          className="flex-1 bg-primary hover:bg-brand-blue-light disabled:bg-muted disabled:text-muted-foreground text-white py-3 px-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg"
+                        >
+                          Verificar
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Submit Button */}
