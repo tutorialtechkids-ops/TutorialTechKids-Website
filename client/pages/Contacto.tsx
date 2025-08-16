@@ -1,66 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Send, Shield, MessageCircle, Bot, CheckCircle, X } from "lucide-react";
+
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
 
 export default function Contacto() {
   const [formData, setFormData] = useState({
     name: "",
     message: ""
   });
-  const [showCaptcha, setShowCaptcha] = useState(false);
   const [captchaCompleted, setCaptchaCompleted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
-  // Simple image captcha
-  const [captchaImages] = useState([
-    { id: 1, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 2, emoji: "🏠", name: "house", isCorrect: false },
-    { id: 3, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 4, emoji: "🌳", name: "tree", isCorrect: false },
-    { id: 5, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 6, emoji: "🎈", name: "balloon", isCorrect: false },
-    { id: 7, emoji: "🏠", name: "house", isCorrect: false },
-    { id: 8, emoji: "🚗", name: "car", isCorrect: true },
-    { id: 9, emoji: "🌳", name: "tree", isCorrect: false }
-  ]);
-  
-  const [selectedImages, setSelectedImages] = useState<number[]>([]);
+  useEffect(() => {
+    const checkRecaptcha = () => {
+      if (window.grecaptcha) {
+        setRecaptchaLoaded(true);
+      } else {
+        setTimeout(checkRecaptcha, 100);
+      }
+    };
+    checkRecaptcha();
+  }, []);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleImageClick = (imageId: number) => {
-    if (selectedImages.includes(imageId)) {
-      setSelectedImages(prev => prev.filter(id => id !== imageId));
-    } else {
-      setSelectedImages(prev => [...prev, imageId]);
-    }
-  };
-
-  const verifyCaptcha = () => {
-    const correctImages = captchaImages.filter(img => img.isCorrect).map(img => img.id);
-    const isCorrect = selectedImages.length === correctImages.length && 
-                     selectedImages.every(id => correctImages.includes(id));
-    
-    if (isCorrect) {
-      setCaptchaCompleted(true);
-      setShowCaptcha(false);
-    } else {
-      alert("Por favor, selecciona solo los carros. Inténtalo de nuevo.");
-      setSelectedImages([]);
-    }
+  const onRecaptchaChange = (token: string | null) => {
+    setCaptchaCompleted(!!token);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name.trim() || !formData.message.trim()) {
       alert("Por favor, completa todos los campos.");
       return;
     }
 
     if (!captchaCompleted) {
-      setShowCaptcha(true);
+      alert("Por favor, completa la verificación reCAPTCHA.");
       return;
     }
 
@@ -178,17 +162,30 @@ export default function Contacto() {
                 />
               </div>
 
-              {/* Security Notice */}
-              <div className="bg-muted/50 rounded-xl p-4">
-                <div className="flex items-start space-x-3">
-                  <Shield className="h-5 w-5 text-primary mt-0.5" />
-                  <div className="text-sm">
-                    <p className="text-foreground font-medium mb-1">Verificación de Seguridad</p>
-                    <p className="text-muted-foreground">
-                      Para evitar spam, necesitarás completar un puzzle de seguridad antes de enviar tu mensaje.
-                    </p>
+              {/* Google reCAPTCHA */}
+              <div className="space-y-4">
+                <div className="bg-muted/50 rounded-xl p-4">
+                  <div className="flex items-start space-x-3">
+                    <Shield className="h-5 w-5 text-primary mt-0.5" />
+                    <div className="text-sm">
+                      <p className="text-foreground font-medium mb-1">Verificación de Seguridad</p>
+                      <p className="text-muted-foreground">
+                        Para evitar spam, completa la verificación reCAPTCHA antes de enviar tu mensaje.
+                      </p>
+                    </div>
                   </div>
                 </div>
+
+                {recaptchaLoaded && (
+                  <div className="flex justify-center">
+                    <div
+                      className="g-recaptcha"
+                      data-sitekey="6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb"
+                      data-action="CONTACT"
+                      data-callback="onRecaptchaChange"
+                    ></div>
+                  </div>
+                )}
               </div>
 
               {/* Submit Button */}
@@ -202,59 +199,6 @@ export default function Contacto() {
             </div>
           </form>
 
-          {/* Captcha Modal */}
-          {showCaptcha && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
-                <div className="text-center mb-6">
-                  <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Shield className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">Verificación de Seguridad</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Selecciona todas las imágenes que contienen <strong>carros</strong>
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-3 gap-3 mb-6">
-                  {captchaImages.map((image) => (
-                    <button
-                      key={image.id}
-                      type="button"
-                      onClick={() => handleImageClick(image.id)}
-                      className={`aspect-square border-2 rounded-xl flex items-center justify-center text-4xl transition-all ${
-                        selectedImages.includes(image.id)
-                          ? "border-primary bg-primary/10 scale-95"
-                          : "border-gray-200 hover:border-primary/50"
-                      }`}
-                    >
-                      {image.emoji}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="flex space-x-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowCaptcha(false);
-                      setSelectedImages([]);
-                    }}
-                    className="flex-1 bg-muted hover:bg-muted/80 text-muted-foreground py-3 px-4 rounded-xl font-medium transition-colors"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    type="button"
-                    onClick={verifyCaptcha}
-                    className="flex-1 bg-primary hover:bg-brand-blue-light text-white py-3 px-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg"
-                  >
-                    Verificar
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </main>
