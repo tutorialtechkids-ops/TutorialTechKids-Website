@@ -1,12 +1,21 @@
 import { useState } from "react";
-import { ShoppingBag, Star, Check, Palette, Smartphone, Calendar, Download } from "lucide-react";
+import { ShoppingBag, Star, Check, Palette, Smartphone, Calendar, Download, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PaymentButton } from "../components/PaymentButton";
+import { useUser } from "../contexts/UserContext";
 
 export default function Tienda() {
+  const { isAdmin, isAuthenticated } = useUser();
   const [showPayment, setShowPayment] = useState(false);
 
   const handlePurchase = () => {
+    // Admin bypass - go directly to planner form
+    if (isAuthenticated() && isAdmin()) {
+      window.location.href = "/planner-personalizado";
+      return;
+    }
+
+    // Regular users go through payment
     setShowPayment(true);
   };
 
@@ -34,6 +43,22 @@ export default function Tienda() {
               Productos digitales personalizados para organizar tu vida de manera creativa y eficiente
             </p>
           </div>
+
+          {/* Admin Notice */}
+          {isAuthenticated() && isAdmin() && (
+            <div className="max-w-4xl mx-auto mb-8">
+              <div className="bg-gradient-to-r from-accent/10 to-primary/10 border-2 border-accent/20 rounded-2xl p-6">
+                <div className="flex items-center justify-center space-x-3 mb-3">
+                  <Crown className="h-6 w-6 text-accent" />
+                  <h3 className="text-xl font-bold text-foreground">Acceso de Administrador</h3>
+                </div>
+                <p className="text-center text-muted-foreground">
+                  Como administrador, tienes acceso gratuito a todos los productos.
+                  Puedes ir directamente al formulario de personalización sin pagar.
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* Featured Product */}
           <div className="max-w-4xl mx-auto">
@@ -121,10 +146,23 @@ export default function Tienda() {
 
                       <button
                         onClick={handlePurchase}
-                        className="w-full bg-primary hover:bg-brand-blue-light text-primary-foreground py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center justify-center space-x-2"
+                        className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center justify-center space-x-2 ${
+                          isAuthenticated() && isAdmin()
+                            ? "bg-accent hover:bg-brand-purple-light text-white"
+                            : "bg-primary hover:bg-brand-blue-light text-primary-foreground"
+                        }`}
                       >
-                        <ShoppingBag className="h-5 w-5" />
-                        <span>Personalizar y Comprar</span>
+                        {isAuthenticated() && isAdmin() ? (
+                          <>
+                            <Crown className="h-5 w-5" />
+                            <span>Acceso Gratis - Personalizar</span>
+                          </>
+                        ) : (
+                          <>
+                            <ShoppingBag className="h-5 w-5" />
+                            <span>Personalizar y Comprar</span>
+                          </>
+                        )}
                       </button>
 
                       <p className="text-xs text-muted-foreground text-center mt-3">
