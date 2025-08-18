@@ -20,11 +20,15 @@ export default function PlannerPersonalizado() {
     customPlannerColor: "",
     paperStyle: "white",
     customImage: null,
+    imagePreview: "",
     croppingBoxSize: 50,
     imageOpacity: 50,
+    centerHorizontally: false,
+    centerVertically: false,
     paperBackingColor: "ffffff",
     headerBoxesColor: "f7d7f0",
     dated: "",
+    customYear: "",
     startMonth: "january",
     startDate: "",
     tabColors: "rainbow",
@@ -40,6 +44,27 @@ export default function PlannerPersonalizado() {
 
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("El archivo es demasiado grande. Máximo 5MB.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setFormData(prev => ({
+          ...prev,
+          customImage: file,
+          imagePreview: result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleCustomTabTitleChange = (index: number, value: string) => {
@@ -281,7 +306,15 @@ export default function PlannerPersonalizado() {
                   />
                 )}
                 <p className="text-sm text-muted-foreground ml-6">
-                  Find hex color codes <span className="text-primary">here</span>.
+                  Find hex color codes{" "}
+                  <a
+                    href="https://www.google.com/search?q=color+picker"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    here
+                  </a>.
                 </p>
               </div>
             </div>
@@ -309,49 +342,93 @@ export default function PlannerPersonalizado() {
             {/* Custom Image Upload */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">
-                Upload a custom image (use a high resolution image - max 5MB):
+                Upload a custom image (max 5MB):
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
-                  <button
-                    type="button"
-                    className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg transition-colors"
-                  >
+                  <label className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg transition-colors cursor-pointer">
                     Choose File
-                  </button>
-                  <span className="text-sm text-muted-foreground">No file chosen</span>
-                </div>
-                
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Cropping box size:</label>
                     <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={formData.croppingBoxSize}
-                      onChange={(e) => handleInputChange("croppingBoxSize", parseInt(e.target.value))}
-                      className="w-full"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      className="hidden"
                     />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Image opacity:</label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={formData.imageOpacity}
-                      onChange={(e) => handleInputChange("imageOpacity", parseInt(e.target.value))}
-                      className="w-full"
-                    />
-                  </div>
-                  
-                  <div className="flex space-x-4">
-                    <button type="button" className="text-primary hover:underline">Center horizontally</button>
-                    <button type="button" className="text-primary hover:underline">Center vertically</button>
-                  </div>
+                  </label>
+                  <span className="text-sm text-muted-foreground">
+                    {formData.customImage ? formData.customImage.name : "No file chosen"}
+                  </span>
                 </div>
+
+                {formData.imagePreview && (
+                  <div className="border border-border rounded-xl p-4 bg-muted/20">
+                    <h4 className="text-sm font-medium text-foreground mb-3">Image Preview:</h4>
+                    <div className="flex flex-col md:flex-row gap-4">
+                      <div className="flex-shrink-0">
+                        <img
+                          src={formData.imagePreview}
+                          alt="Preview"
+                          className="w-32 h-32 object-cover rounded-lg border border-border"
+                          style={{ opacity: formData.imageOpacity / 100 }}
+                        />
+                      </div>
+
+                      <div className="flex-1 space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-2">
+                            Cropping box size: {formData.croppingBoxSize}%
+                          </label>
+                          <input
+                            type="range"
+                            min="10"
+                            max="100"
+                            value={formData.croppingBoxSize}
+                            onChange={(e) => handleInputChange("croppingBoxSize", parseInt(e.target.value))}
+                            className="w-full"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-2">
+                            Image opacity: {formData.imageOpacity}%
+                          </label>
+                          <input
+                            type="range"
+                            min="10"
+                            max="100"
+                            value={formData.imageOpacity}
+                            onChange={(e) => handleInputChange("imageOpacity", parseInt(e.target.value))}
+                            className="w-full"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <h5 className="text-sm font-medium text-foreground">Image Position:</h5>
+                          <div className="flex flex-wrap gap-3">
+                            <label className="flex items-center space-x-2 cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={formData.centerHorizontally}
+                                onChange={(e) => handleInputChange("centerHorizontally", e.target.checked)}
+                                className="text-primary focus:ring-primary"
+                              />
+                              <span className="text-sm text-foreground">Center horizontally</span>
+                            </label>
+                            <label className="flex items-center space-x-2 cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={formData.centerVertically}
+                                onChange={(e) => handleInputChange("centerVertically", e.target.checked)}
+                                className="text-primary focus:ring-primary"
+                              />
+                              <span className="text-sm text-foreground">Center vertically</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -394,11 +471,12 @@ export default function PlannerPersonalizado() {
               <h3 className="text-lg font-semibold text-foreground mb-4">Select your planner dates:</h3>
               <div className="space-y-3">
                 {[
-                  "One year dated: 2024",
-                  "Two year dated: Jan 2024 - Dec 2025",
                   "One year dated: 2025",
                   "Two year dated: Jan 2025 - Dec 2026",
-                  "One year dated: 2026"
+                  "One year dated: 2026",
+                  "Two year dated: Jan 2026 - Dec 2027",
+                  "One year dated: 2027",
+                  "Custom year (2025-2030 available)"
                 ].map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
                     <input

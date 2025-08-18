@@ -102,15 +102,14 @@ export function LoginForm({ isOpen, onClose, onSuccess }: LoginFormProps) {
             />
           </div>
 
-          {/* Admin Info */}
+          {/* User Info */}
           <div className="bg-muted/50 rounded-xl p-4">
             <div className="flex items-start space-x-3">
               <Lock className="h-5 w-5 text-primary mt-0.5" />
               <div className="text-sm">
-                <p className="text-foreground font-medium mb-1">Sistema de Roles</p>
+                <p className="text-foreground font-medium mb-1">Cuenta de Usuario</p>
                 <p className="text-muted-foreground">
-                  Los administradores tienen acceso gratuito a todos los servicios. 
-                  Los usuarios regulares pueden comprar productos individuales.
+                  Inicia sesión para una experiencia personalizada y acceso a funciones especiales.
                 </p>
               </div>
             </div>

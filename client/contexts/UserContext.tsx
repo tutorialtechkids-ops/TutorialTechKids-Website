@@ -21,6 +21,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 const ADMIN_EMAILS = [
   'belenthiago516@gmail.com',
   'thiagobelent@icloud.com',
+  'valentinab.2114@gmail.com',
   // Add more admin emails as needed
 ];
 
