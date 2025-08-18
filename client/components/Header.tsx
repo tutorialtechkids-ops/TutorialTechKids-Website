@@ -17,16 +17,28 @@ export function Header() {
       />
       <header className="bg-white border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-3 group">
+          <div className="flex items-center justify-between gap-6">
+            <Link to="/" className="flex items-center space-x-3 group flex-shrink-0">
               <div className="relative">
-                <img 
-                  src="https://cdn.builder.io/api/v1/image/assets%2F75429be7c5c14d53944e7223414b1226%2Fc5904ce66f4149d4807a7346fef65976?format=webp&width=200"
-                  alt="TutorialTechKids Logo"
-                  className="h-12 w-auto group-hover:scale-105 transition-transform"
-                />
+                <h1 className="text-2xl font-bold text-primary group-hover:text-brand-blue-light transition-colors">
+                  TutorialTechKids
+                </h1>
               </div>
             </Link>
+
+            {/* Search Bar */}
+            <div className="flex-1 max-w-2xl mx-6">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Buscar tutoriales, tips, recursos..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-border rounded-full bg-muted/30 focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-muted-foreground"
+                />
+              </div>
+            </div>
             
             <nav className="hidden md:flex items-center space-x-8">
               <Link 
