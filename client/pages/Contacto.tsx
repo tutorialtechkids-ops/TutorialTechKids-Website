@@ -70,7 +70,7 @@ export default function Contacto() {
   const generateBotResponse = (name: string, message: string) => {
     const responses = [
       `¡Hola ${name}! 🤖 Gracias por contactar TutorialTechKids. He recibido tu mensaje sobre "${message.substring(0, 50)}..." y lo he enviado a nuestro equipo.`,
-      `¡Saludos ${name}! ��� Tu consulta ha sido registrada exitosamente. Nuestro equipo revisará tu mensaje y te responderá pronto.`,
+      `¡Saludos ${name}! 👋 Tu consulta ha sido registrada exitosamente. Nuestro equipo revisará tu mensaje y te responderá pronto.`,
       `¡Hola ${name}! ✨ Mensaje recibido. Nos comunicaremos contigo en las próximas 24 horas para ayudarte con tu consulta.`,
       `¡Hi ${name}! 🚀 Tu mensaje sobre tecnología ha llegado al lugar correcto. Nuestros expertos te responderán muy pronto.`
     ];
@@ -133,8 +133,9 @@ export default function Contacto() {
             <button
               onClick={() => {
                 setSubmitted(false);
-                setFormData({ name: "", message: "" });
+                setFormData({ name: "", email: "", message: "" });
                 setCaptchaCompleted(false);
+                setShowError("");
               }}
               className="bg-primary hover:bg-brand-blue-light text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:shadow-lg"
             >
