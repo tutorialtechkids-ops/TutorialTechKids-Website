@@ -40,7 +40,7 @@ export function Header() {
               </div>
             </div>
             
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-6 flex-shrink-0">
               <Link 
                 to="/" 
                 className="text-foreground hover:text-primary transition-colors font-medium"
