@@ -782,16 +782,24 @@ export default function PlannerPersonalizado() {
 
             {/* Google reCAPTCHA */}
             <div className="mb-8">
-              <p className="text-sm font-medium text-foreground mb-4">
-                {recaptchaCompleted
-                  ? "✅ Verificación completada - ¡Listo para generar tu planner!"
-                  : "Completa la verificación reCAPTCHA para generar tu planner:"
-                }
-              </p>
-
-              <div className="flex justify-center">
-                <div id="planner-recaptcha"></div>
+              <div className={`rounded-xl p-4 mb-4 ${recaptchaCompleted ? 'bg-green-50 border border-green-200' : 'bg-muted/50'}`}>
+                <p className={`text-sm font-medium mb-2 ${recaptchaCompleted ? 'text-green-700' : 'text-foreground'}`}>
+                  {recaptchaCompleted
+                    ? "✅ Verificación completada - ¡Listo para generar tu planner!"
+                    : "Completa la verificación reCAPTCHA para generar tu planner:"
+                  }
+                </p>
               </div>
+
+              <div className="flex justify-center bg-gray-50 rounded-xl p-4">
+                <div id="planner-recaptcha" className="min-h-[78px]"></div>
+              </div>
+
+              {!recaptchaCompleted && (
+                <p className="text-xs text-muted-foreground text-center mt-2">
+                  Si no ves el reCAPTCHA, verifica que JavaScript esté habilitado en tu navegador
+                </p>
+              )}
             </div>
 
             {/* Submit Button */}
