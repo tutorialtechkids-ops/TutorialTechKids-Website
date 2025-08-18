@@ -18,29 +18,48 @@ export default function Contacto() {
   const [botResponse, setBotResponse] = useState("");
 
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 50; // 5 seconds max wait
+
     const checkRecaptcha = () => {
+      if (retryCount >= maxRetries) {
+        console.log('reCAPTCHA failed to load after maximum retries');
+        return;
+      }
+
       if (window.grecaptcha && window.grecaptcha.render) {
         try {
-          setTimeout(() => {
-            const container = document.getElementById('contact-recaptcha');
-            if (container && !container.innerHTML) {
-              window.grecaptcha.render('contact-recaptcha', {
-                'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
-                'callback': (token: string) => {
-                  setCaptchaCompleted(true);
-                }
-              });
-            }
-          }, 500);
+          const container = document.getElementById('contact-recaptcha');
+          if (container && !container.innerHTML) {
+            window.grecaptcha.render('contact-recaptcha', {
+              'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
+              'callback': (token: string) => {
+                console.log('reCAPTCHA completed');
+                setCaptchaCompleted(true);
+              },
+              'expired-callback': () => {
+                console.log('reCAPTCHA expired');
+                setCaptchaCompleted(false);
+              },
+              'error-callback': () => {
+                console.log('reCAPTCHA error');
+                setCaptchaCompleted(false);
+              }
+            });
+          }
         } catch (error) {
-          console.log('reCAPTCHA failed to load');
+          console.log('Error rendering reCAPTCHA:', error);
+          retryCount++;
+          setTimeout(checkRecaptcha, 100);
         }
       } else {
+        retryCount++;
         setTimeout(checkRecaptcha, 100);
       }
     };
 
-    checkRecaptcha();
+    // Wait a bit for the page to load completely
+    setTimeout(checkRecaptcha, 500);
   }, []);
 
   const handleInputChange = (field: string, value: string) => {
