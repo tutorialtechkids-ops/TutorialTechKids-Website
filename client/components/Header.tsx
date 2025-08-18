@@ -73,7 +73,7 @@ export function Header() {
               </Link>
             </nav>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 flex-shrink-0">
               {isAuthenticated() ? (
                 <div className="flex items-center space-x-3">
                   {isAdmin() && (
