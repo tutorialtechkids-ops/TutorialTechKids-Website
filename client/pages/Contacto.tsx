@@ -237,24 +237,30 @@ export default function Contacto() {
 
               {/* Google reCAPTCHA */}
               <div className="space-y-4">
-                <div className="bg-muted/50 rounded-xl p-4">
+                <div className={`rounded-xl p-4 ${captchaCompleted ? 'bg-green-50 border border-green-200' : 'bg-muted/50'}`}>
                   <div className="flex items-start space-x-3">
-                    <Shield className="h-5 w-5 text-primary mt-0.5" />
+                    <Shield className={`h-5 w-5 mt-0.5 ${captchaCompleted ? 'text-green-600' : 'text-primary'}`} />
                     <div className="text-sm">
                       <p className="text-foreground font-medium mb-1">Verificación de Seguridad</p>
-                      <p className="text-muted-foreground">
+                      <p className={captchaCompleted ? 'text-green-700' : 'text-muted-foreground'}>
                         {captchaCompleted
                           ? "✅ Verificación completada exitosamente"
-                          : "Completa el reCAPTCHA para enviar tu mensaje"
+                          : "Completa el reCAPTCHA que aparece abajo para enviar tu mensaje"
                         }
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex justify-center">
-                  <div id="contact-recaptcha"></div>
+                <div className="flex justify-center bg-gray-50 rounded-xl p-4">
+                  <div id="contact-recaptcha" className="min-h-[78px]"></div>
                 </div>
+
+                {!captchaCompleted && (
+                  <p className="text-xs text-muted-foreground text-center">
+                    Si no ves el reCAPTCHA, verifica que JavaScript esté habilitado en tu navegador
+                  </p>
+                )}
               </div>
 
               {/* Submit Button */}
