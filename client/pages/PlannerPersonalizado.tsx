@@ -116,24 +116,42 @@ export default function PlannerPersonalizado() {
     const detectedLanguage = languageMap[deviceLanguage.split('-')[0]] || 'english';
     setFormData(prev => ({ ...prev, language: detectedLanguage }));
 
+    let retryCount = 0;
+    const maxRetries = 50;
+
     const checkRecaptcha = () => {
+      if (retryCount >= maxRetries) {
+        console.log('reCAPTCHA failed to load after maximum retries');
+        return;
+      }
+
       if (window.grecaptcha && window.grecaptcha.render) {
         try {
-          setTimeout(() => {
-            const container = document.getElementById('planner-recaptcha');
-            if (container && !container.innerHTML) {
-              window.grecaptcha.render('planner-recaptcha', {
-                'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
-                'callback': (token: string) => {
-                  setRecaptchaCompleted(true);
-                }
-              });
-            }
-          }, 500);
+          const container = document.getElementById('planner-recaptcha');
+          if (container && !container.innerHTML) {
+            window.grecaptcha.render('planner-recaptcha', {
+              'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
+              'callback': (token: string) => {
+                console.log('reCAPTCHA completed');
+                setRecaptchaCompleted(true);
+              },
+              'expired-callback': () => {
+                console.log('reCAPTCHA expired');
+                setRecaptchaCompleted(false);
+              },
+              'error-callback': () => {
+                console.log('reCAPTCHA error');
+                setRecaptchaCompleted(false);
+              }
+            });
+          }
         } catch (error) {
-          console.log('reCAPTCHA failed to load');
+          console.log('Error rendering reCAPTCHA:', error);
+          retryCount++;
+          setTimeout(checkRecaptcha, 100);
         }
       } else {
+        retryCount++;
         setTimeout(checkRecaptcha, 100);
       }
     };
