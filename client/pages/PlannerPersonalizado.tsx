@@ -162,7 +162,15 @@ export default function PlannerPersonalizado() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!recaptchaCompleted) {
-      alert("Por favor, completa la verificación reCAPTCHA");
+      // Focus on the reCAPTCHA area instead of showing alert
+      const recaptchaElement = document.getElementById('planner-recaptcha');
+      if (recaptchaElement) {
+        recaptchaElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        recaptchaElement.style.border = '2px solid #ef4444';
+        setTimeout(() => {
+          recaptchaElement.style.border = '';
+        }, 3000);
+      }
       return;
     }
     // Here you would process the form and generate the custom planner
