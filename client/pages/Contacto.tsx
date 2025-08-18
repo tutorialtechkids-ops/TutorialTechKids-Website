@@ -16,6 +16,7 @@ export default function Contacto() {
   const [captchaCompleted, setCaptchaCompleted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [botResponse, setBotResponse] = useState("");
+  const [showError, setShowError] = useState("");
 
   useEffect(() => {
     let retryCount = 0;
