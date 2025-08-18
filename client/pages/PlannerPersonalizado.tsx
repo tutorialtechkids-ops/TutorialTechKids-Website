@@ -549,6 +549,23 @@ export default function PlannerPersonalizado() {
                   </label>
                 ))}
               </div>
+
+              {formData.dated === "Custom year (2025-2030 available)" && (
+                <div className="mt-4 ml-6">
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Enter custom year (2025-2030):
+                  </label>
+                  <input
+                    type="number"
+                    min="2025"
+                    max="2030"
+                    value={formData.customYear}
+                    onChange={(e) => handleInputChange("customYear", e.target.value)}
+                    placeholder="2028"
+                    className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Start Month */}
