@@ -8,6 +8,17 @@ export function Header() {
   const { user, logout, isAdmin, isAuthenticated } = useUser();
   const [showLogin, setShowLogin] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Aquí implementarías la lógica de búsqueda
+      console.log("Searching for:", searchQuery);
+      // Por ejemplo, redirigir a una página de resultados
+      // window.location.href = `/buscar?q=${encodeURIComponent(searchQuery)}`;
+    }
+  };
 
   return (
     <>
