@@ -74,6 +74,48 @@ export default function PlannerPersonalizado() {
   };
 
   useEffect(() => {
+    // Detect device language and set default language
+    const deviceLanguage = navigator.language || navigator.languages[0] || 'en-US';
+    const languageMap: { [key: string]: string } = {
+      'es': 'spanish',
+      'en': 'english',
+      'pt': 'portuguese',
+      'fr': 'french',
+      'it': 'italian',
+      'de': 'german',
+      'zh': 'chinese',
+      'ja': 'japanese',
+      'ko': 'korean',
+      'ar': 'arabic',
+      'ru': 'russian',
+      'hi': 'hindi',
+      'nl': 'dutch',
+      'sv': 'swedish',
+      'no': 'norwegian',
+      'da': 'danish',
+      'fi': 'finnish',
+      'pl': 'polish',
+      'cs': 'czech',
+      'hu': 'hungarian',
+      'ro': 'romanian',
+      'bg': 'bulgarian',
+      'hr': 'croatian',
+      'sr': 'serbian',
+      'uk': 'ukrainian',
+      'el': 'greek',
+      'tr': 'turkish',
+      'he': 'hebrew',
+      'th': 'thai',
+      'vi': 'vietnamese',
+      'id': 'indonesian',
+      'ms': 'malay',
+      'tl': 'tagalog',
+      'sw': 'swahili'
+    };
+
+    const detectedLanguage = languageMap[deviceLanguage.split('-')[0]] || 'english';
+    setFormData(prev => ({ ...prev, language: detectedLanguage }));
+
     const checkRecaptcha = () => {
       if (window.grecaptcha && window.grecaptcha.render) {
         try {
@@ -442,7 +484,15 @@ export default function PlannerPersonalizado() {
                 className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
               <p className="text-sm text-muted-foreground mt-1">
-                Find hex color codes <span className="text-primary">here</span>
+                Find hex color codes{" "}
+                <a
+                  href="https://www.google.com/search?q=color+picker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  here
+                </a>
               </p>
             </div>
 
@@ -462,7 +512,15 @@ export default function PlannerPersonalizado() {
                 ></div>
               </div>
               <p className="text-sm text-muted-foreground mt-1">
-                Find hex color codes <span className="text-primary">here</span>
+                Find hex color codes{" "}
+                <a
+                  href="https://www.google.com/search?q=color+picker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  here
+                </a>
               </p>
             </div>
 
