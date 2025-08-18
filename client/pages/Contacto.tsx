@@ -79,14 +79,15 @@ export default function Contacto() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setShowError("");
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      alert("Por favor, completa todos los campos.");
+      setShowError("Por favor, completa todos los campos.");
       return;
     }
 
     if (!captchaCompleted) {
-      alert("Por favor, completa la verificación reCAPTCHA.");
+      setShowError("Por favor, completa la verificación reCAPTCHA antes de enviar el mensaje.");
       return;
     }
 
