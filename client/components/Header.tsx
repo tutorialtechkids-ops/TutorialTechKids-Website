@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Brain, User, LogOut, Crown, Search } from "lucide-react";
+import { Brain, User, LogOut, Crown, Search, Menu, X } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
 import { LoginForm } from "./LoginForm";
 
