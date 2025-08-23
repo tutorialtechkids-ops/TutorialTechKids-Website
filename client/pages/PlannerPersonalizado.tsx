@@ -78,49 +78,8 @@ export default function PlannerPersonalizado() {
   };
 
   useEffect(() => {
-    // Detect device language and set default language
-    const deviceLanguage = navigator.language || navigator.languages[0] || 'en-US';
-    const languageMap: { [key: string]: string } = {
-      'es': 'spanish',
-      'en': 'english',
-      'pt': 'portuguese',
-      'fr': 'french',
-      'it': 'italian',
-      'de': 'german',
-      'zh': 'chinese',
-      'ja': 'japanese',
-      'ko': 'korean',
-      'ar': 'arabic',
-      'ru': 'russian',
-      'hi': 'hindi',
-      'nl': 'dutch',
-      'sv': 'swedish',
-      'no': 'norwegian',
-      'da': 'danish',
-      'fi': 'finnish',
-      'pl': 'polish',
-      'cs': 'czech',
-      'hu': 'hungarian',
-      'ro': 'romanian',
-      'bg': 'bulgarian',
-      'hr': 'croatian',
-      'sr': 'serbian',
-      'uk': 'ukrainian',
-      'el': 'greek',
-      'tr': 'turkish',
-      'he': 'hebrew',
-      'th': 'thai',
-      'vi': 'vietnamese',
-      'id': 'indonesian',
-      'ms': 'malay',
-      'tl': 'tagalog',
-      'sw': 'swahili'
-    };
-
-    const detectedLanguage = languageMap[deviceLanguage.split('-')[0]] || 'english';
-    setFormData(prev => ({ ...prev, language: detectedLanguage }));
-
-    // Simple callback para reCAPTCHA
+    // El idioma ya se detecta automáticamente por el LanguageContext
+    // Solo configuramos los callbacks de reCAPTCHA
     window.onPlannerRecaptchaSuccess = () => {
       setRecaptchaCompleted(true);
     };
@@ -132,7 +91,6 @@ export default function PlannerPersonalizado() {
     window.onPlannerRecaptchaError = () => {
       setRecaptchaCompleted(false);
     };
-
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
