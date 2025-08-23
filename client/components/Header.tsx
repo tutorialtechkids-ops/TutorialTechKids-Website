@@ -127,35 +127,35 @@ export function Header() {
                   className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  Inicio
+                  {t('nav.home')}
                 </Link>
                 <Link
                   to="/redes-sociales"
                   className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  Redes Sociales
+                  {t('nav.social')}
                 </Link>
                 <Link
                   to="/tienda"
                   className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  Mi Tienda
+                  {t('nav.store')}
                 </Link>
                 <Link
                   to="/sobre-nosotros"
                   className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  Sobre nosotros
+                  {t('nav.about')}
                 </Link>
                 <Link
                   to="/contacto"
                   className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  Contacto
+                  {t('nav.contact')}
                 </Link>
               </nav>
 
@@ -193,7 +193,7 @@ export function Header() {
                       }}
                       className="block text-foreground hover:text-primary transition-colors font-medium"
                     >
-                      Iniciar Sesión
+                      {t('nav.login')}
                     </button>
                     <a
                       href="https://www.youtube.com/@TutorialTechKids"
@@ -202,7 +202,7 @@ export function Header() {
                       className="block bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg text-center"
                       onClick={() => setShowMobileMenu(false)}
                     >
-                      Comenzar
+                      {t('nav.start')}
                     </a>
                   </div>
                 )}
