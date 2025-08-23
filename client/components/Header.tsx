@@ -20,7 +20,7 @@ export function Header() {
           {/* Logo/Brand - Center */}
           <div className="text-center mb-4">
             <Link to="/" className="inline-block group">
-              <h1 className="text-3xl font-bold text-black group-hover:text-primary transition-colors font-serif">
+              <h1 className="text-3xl font-bold text-black group-hover:text-primary transition-colors">
                 TutorialTechKids
               </h1>
             </Link>
