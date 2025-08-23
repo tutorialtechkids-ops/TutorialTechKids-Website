@@ -24,89 +24,23 @@ export function Header() {
         onClose={() => setShowLogin(false)} 
       />
       <header className="bg-white sticky top-0 z-50">
-        {/* Top bar similar to HappyDownloads */}
+        {/* Simple top bar - Only logo */}
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between gap-6">
-            {/* Logo/Brand - Left */}
-            <Link to="/" className="flex items-center group flex-shrink-0">
+          <div className="flex items-center justify-between">
+            {/* Logo/Brand - Center */}
+            <Link to="/" className="flex items-center group mx-auto">
               <h1 className="text-3xl font-bold text-black group-hover:text-primary transition-colors font-serif">
                 TutorialTechKids
               </h1>
             </Link>
 
-            {/* Search Bar - Center, prominent */}
-            <div className="flex-1 max-w-xl mx-8 hidden md:block">
-              <form onSubmit={handleSearch} className="w-full">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Buscar tutoriales, tips, recursos..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-md text-lg focus:border-primary focus:outline-none transition-all"
-                  />
-                  <button 
-                    type="submit"
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                  >
-                    <Search className="h-5 w-5 text-gray-400 hover:text-primary transition-colors" />
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            {/* User area - Right */}
-            <div className="flex items-center space-x-4 flex-shrink-0">
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setShowMobileMenu(!showMobileMenu)}
-                className="lg:hidden text-foreground hover:text-primary transition-colors"
-              >
-                {showMobileMenu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-
-              {/* Desktop User Area */}
-              <div className="hidden lg:flex items-center space-x-3">
-                {isAuthenticated() ? (
-                  <div className="flex items-center space-x-3">
-                    {isAdmin() && (
-                      <div className="flex items-center space-x-1 bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">
-                        <Crown className="h-4 w-4" />
-                        <span>Admin</span>
-                      </div>
-                    )}
-                    <div className="flex items-center space-x-2 text-foreground">
-                      <User className="h-4 w-4" />
-                      <span className="font-medium">{user?.name}</span>
-                    </div>
-                    <button
-                      onClick={logout}
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                      title="Cerrar sesión"
-                    >
-                      <LogOut className="h-4 w-4" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-3">
-                    <button
-                      onClick={() => setShowLogin(true)}
-                      className="text-foreground hover:text-primary transition-colors font-medium"
-                    >
-                      Iniciar Sesión
-                    </button>
-                    <a 
-                      href="https://www.youtube.com/@TutorialTechKids"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg inline-block"
-                    >
-                      Comenzar
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
+            {/* Mobile Menu Button - Right */}
+            <button
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="lg:hidden text-foreground hover:text-primary transition-colors absolute right-4"
+            >
+              {showMobileMenu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
 
