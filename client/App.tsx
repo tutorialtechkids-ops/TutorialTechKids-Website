@@ -3,6 +3,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { CookieBanner } from "./components/CookieBanner";
 import { UserProvider } from "./contexts/UserContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Privacidad from "./pages/Privacidad";
