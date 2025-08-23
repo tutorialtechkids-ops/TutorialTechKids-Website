@@ -331,12 +331,12 @@ export default function PlannerPersonalizado() {
             {/* Custom Image Upload */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">
-                Upload a custom image (max 5MB):
+                {t('planner.customImage')}
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <label className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg transition-colors cursor-pointer">
-                    Choose File
+                    {t('planner.chooseFile')}
                     <input
                       type="file"
                       accept="image/*"
@@ -345,7 +345,7 @@ export default function PlannerPersonalizado() {
                     />
                   </label>
                   <span className="text-sm text-muted-foreground">
-                    {formData.customImage ? formData.customImage.name : "No file chosen"}
+                    {formData.customImage ? formData.customImage.name : t('planner.noFile')}
                   </span>
                 </div>
 
