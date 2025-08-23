@@ -135,14 +135,10 @@ export default function PlannerPersonalizado() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!recaptchaCompleted) {
-      // Focus on the reCAPTCHA area instead of showing alert
-      const recaptchaElement = document.getElementById('planner-recaptcha');
+      // Scroll to reCAPTCHA area
+      const recaptchaElement = document.querySelector('.g-recaptcha');
       if (recaptchaElement) {
         recaptchaElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        recaptchaElement.style.border = '2px solid #ef4444';
-        setTimeout(() => {
-          recaptchaElement.style.border = '';
-        }, 3000);
       }
       return;
     }
