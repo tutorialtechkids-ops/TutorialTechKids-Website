@@ -7,6 +7,7 @@ import { LoginForm } from "./LoginForm";
 
 export function Header() {
   const { user, logout, isAdmin, isAuthenticated } = useUser();
+  const { t } = useLanguage();
   const [showLogin, setShowLogin] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
