@@ -513,7 +513,7 @@ export default function PlannerPersonalizado() {
 
             {/* Start Month */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-foreground mb-2">Start month:</label>
+              <label className="block text-sm font-medium text-foreground mb-2">{t('planner.startMonth')}</label>
               <select
                 value={formData.startMonth}
                 onChange={(e) => handleInputChange("startMonth", e.target.value)}
@@ -530,7 +530,7 @@ export default function PlannerPersonalizado() {
 
             {/* Start Date */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Start date:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.startDate')}</h3>
               <div className="space-y-3">
                 {["Monday", "Sunday"].map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
@@ -550,7 +550,7 @@ export default function PlannerPersonalizado() {
 
             {/* Tab Colors */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Tab colors:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.tabColors')}</h3>
               <div className="space-y-3">
                 {["Rainbow tabs", "Cream tabs"].map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
@@ -589,7 +589,7 @@ export default function PlannerPersonalizado() {
 
             {/* Tab Font Color */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Tab font color:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.tabFont')}</h3>
               <div className="space-y-3">
                 {["Black", "White"].map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
@@ -609,7 +609,7 @@ export default function PlannerPersonalizado() {
 
             {/* Tab Titles */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Tab titles and links:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.tabTitles')}</h3>
               <div className="space-y-3 mb-4">
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -660,7 +660,7 @@ export default function PlannerPersonalizado() {
 
             {/* Daily Time Start */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-foreground mb-2">Daily time start:</label>
+              <label className="block text-sm font-medium text-foreground mb-2">{t('planner.dailyTime')}</label>
               <select
                 value={formData.dailyTimeStart}
                 onChange={(e) => handleInputChange("dailyTimeStart", parseInt(e.target.value))}
@@ -674,7 +674,7 @@ export default function PlannerPersonalizado() {
 
             {/* Calendar Links */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Apple and Google calendar links on daily pages:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.calendar')}</h3>
               <div className="space-y-3">
                 {[
                   "None",
