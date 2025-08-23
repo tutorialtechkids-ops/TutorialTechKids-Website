@@ -310,7 +310,7 @@ export default function PlannerPersonalizado() {
 
             {/* Paper Style */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Paper Style:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.paperStyle')}</h3>
               <div className="space-y-3">
                 {["White", "Cream"].map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
