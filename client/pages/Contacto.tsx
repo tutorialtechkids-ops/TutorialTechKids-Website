@@ -223,7 +223,12 @@ export default function Contacto() {
                 </div>
 
                 <div className="flex justify-center bg-gray-50 rounded-xl p-4">
-                  <div id="contact-recaptcha" className="min-h-[78px]"></div>
+                  <div className="g-recaptcha"
+                       data-sitekey="6LdoPK8rAAAAACjJnvHEF2McHDnVB5R1oC-Akuk1"
+                       data-callback="onRecaptchaSuccess"
+                       data-expired-callback="onRecaptchaExpired"
+                       data-error-callback="onRecaptchaError">
+                  </div>
                 </div>
 
                 {!captchaCompleted && (
