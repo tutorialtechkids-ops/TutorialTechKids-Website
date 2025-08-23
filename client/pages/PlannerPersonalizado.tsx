@@ -131,7 +131,6 @@ export default function PlannerPersonalizado() {
       setRecaptchaCompleted(false);
     };
 
-    checkRecaptcha();
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
