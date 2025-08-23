@@ -469,7 +469,7 @@ export default function PlannerPersonalizado() {
 
             {/* Dated Planner Options */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Select your planner dates:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.dates')}</h3>
               <div className="space-y-3">
                 {[
                   "One year dated: 2025",
