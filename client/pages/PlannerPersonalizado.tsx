@@ -13,6 +13,7 @@ declare global {
 }
 
 export default function PlannerPersonalizado() {
+  const { t, language } = useLanguage();
   const [recaptchaCompleted, setRecaptchaCompleted] = useState(false);
 
   const [formData, setFormData] = useState({
