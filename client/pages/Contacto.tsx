@@ -33,7 +33,7 @@ export default function Contacto() {
           const container = document.getElementById('contact-recaptcha');
           if (container && !container.innerHTML) {
             window.grecaptcha.render('contact-recaptcha', {
-              'sitekey': '6LfRkKcrAAAAAO16M1EkNu5Rx7kZKphc6dgScsjb',
+              'sitekey': '6LdoPK8rAAAAACjJnvHEF2McHDnVB5R1oC-Akuk1',
               'callback': (token: string) => {
                 console.log('reCAPTCHA completed');
                 setCaptchaCompleted(true);
