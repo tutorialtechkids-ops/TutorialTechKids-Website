@@ -44,40 +44,85 @@ export function Header() {
           </div>
         </div>
 
-        {/* Navigation bar - Black background like HappyDownloads */}
+        {/* Navigation bar - Black background with everything */}
         <div className="bg-black">
           <div className="container mx-auto px-4">
-            <nav className="hidden lg:flex items-center justify-center space-x-8 py-3">
-              <Link 
-                to="/" 
-                className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-              >
-                Inicio
-              </Link>
-              <Link 
-                to="/redes-sociales" 
-                className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-              >
-                Redes Sociales
-              </Link>
-              <Link 
-                to="/tienda" 
-                className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-              >
-                Mi Tienda
-              </Link>
-              <Link 
-                to="/sobre-nosotros" 
-                className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-              >
-                Sobre nosotros
-              </Link>
-              <Link 
-                to="/contacto" 
-                className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-              >
-                Contacto
-              </Link>
+            <nav className="hidden lg:flex items-center justify-between py-3">
+              {/* Left side - Navigation links */}
+              <div className="flex items-center space-x-8">
+                <Link
+                  to="/"
+                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
+                >
+                  Inicio
+                </Link>
+                <Link
+                  to="/redes-sociales"
+                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
+                >
+                  Redes Sociales
+                </Link>
+                <Link
+                  to="/tienda"
+                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
+                >
+                  Mi Tienda
+                </Link>
+                <Link
+                  to="/sobre-nosotros"
+                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
+                >
+                  Sobre nosotros
+                </Link>
+                <Link
+                  to="/contacto"
+                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
+                >
+                  Contacto
+                </Link>
+              </div>
+
+              {/* Right side - User area */}
+              <div className="flex items-center space-x-4">
+                {isAuthenticated() ? (
+                  <div className="flex items-center space-x-3">
+                    {isAdmin() && (
+                      <div className="flex items-center space-x-1 bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-medium">
+                        <Crown className="h-4 w-4" />
+                        <span>Admin</span>
+                      </div>
+                    )}
+                    <div className="flex items-center space-x-2 text-white">
+                      <User className="h-4 w-4" />
+                      <span className="font-medium">{user?.name}</span>
+                    </div>
+                    <button
+                      onClick={logout}
+                      className="text-gray-300 hover:text-white transition-colors"
+                      title="Cerrar sesión"
+                    >
+                      <LogOut className="h-4 w-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-4">
+                    <button
+                      onClick={() => setShowLogin(true)}
+                      className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
+                    >
+                      Iniciar Sesión
+                    </button>
+                    <a
+                      href="https://www.youtube.com/@TutorialTechKids"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg text-sm uppercase tracking-wide"
+                    >
+                      Comenzar
+                    </a>
+                  </div>
+                )}
+              </div>
             </nav>
           </div>
         </div>
