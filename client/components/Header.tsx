@@ -92,7 +92,7 @@ export function Header() {
                     onClick={() => setShowLogin(true)}
                     className="text-foreground hover:text-primary transition-colors font-medium"
                   >
-                    Iniciar Sesión
+                    {t('nav.login')}
                   </button>
                   <a
                     href="https://www.youtube.com/@TutorialTechKids"
@@ -100,7 +100,7 @@ export function Header() {
                     rel="noopener noreferrer"
                     className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg"
                   >
-                    Comenzar
+                    {t('nav.start')}
                   </a>
                 </div>
               )}
