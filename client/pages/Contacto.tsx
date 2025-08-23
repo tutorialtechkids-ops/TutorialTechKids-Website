@@ -19,48 +19,18 @@ export default function Contacto() {
   const [showError, setShowError] = useState("");
 
   useEffect(() => {
-    let retryCount = 0;
-    const maxRetries = 50; // 5 seconds max wait
-
-    const checkRecaptcha = () => {
-      if (retryCount >= maxRetries) {
-        console.log('reCAPTCHA failed to load after maximum retries');
-        return;
-      }
-
-      if (window.grecaptcha && window.grecaptcha.render) {
-        try {
-          const container = document.getElementById('contact-recaptcha');
-          if (container && !container.innerHTML) {
-            window.grecaptcha.render('contact-recaptcha', {
-              'sitekey': '6LdoPK8rAAAAACjJnvHEF2McHDnVB5R1oC-Akuk1',
-              'callback': (token: string) => {
-                console.log('reCAPTCHA completed');
-                setCaptchaCompleted(true);
-              },
-              'expired-callback': () => {
-                console.log('reCAPTCHA expired');
-                setCaptchaCompleted(false);
-              },
-              'error-callback': () => {
-                console.log('reCAPTCHA error');
-                setCaptchaCompleted(false);
-              }
-            });
-          }
-        } catch (error) {
-          console.log('Error rendering reCAPTCHA:', error);
-          retryCount++;
-          setTimeout(checkRecaptcha, 100);
-        }
-      } else {
-        retryCount++;
-        setTimeout(checkRecaptcha, 100);
-      }
+    // Simple callback para reCAPTCHA
+    window.onRecaptchaSuccess = () => {
+      setCaptchaCompleted(true);
     };
 
-    // Wait a bit for the page to load completely
-    setTimeout(checkRecaptcha, 500);
+    window.onRecaptchaExpired = () => {
+      setCaptchaCompleted(false);
+    };
+
+    window.onRecaptchaError = () => {
+      setCaptchaCompleted(false);
+    };
   }, []);
 
   const handleInputChange = (field: string, value: string) => {
