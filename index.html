@@ -12,11 +12,35 @@
     <div id="root"></div>
 
     <script>
-      function onRecaptchaChange(token) {
-        // This function will be called when reCAPTCHA is completed
-        window.recaptchaToken = token;
-        // Dispatch a custom event to notify React components
-        window.dispatchEvent(new CustomEvent('recaptchaCompleted', { detail: token }));
+      // Funciones callback globales para reCAPTCHA
+      function onRecaptchaSuccess(token) {
+        console.log('Contact reCAPTCHA completed');
+        if (window.onRecaptchaSuccess) window.onRecaptchaSuccess(token);
+      }
+
+      function onRecaptchaExpired() {
+        console.log('Contact reCAPTCHA expired');
+        if (window.onRecaptchaExpired) window.onRecaptchaExpired();
+      }
+
+      function onRecaptchaError() {
+        console.log('Contact reCAPTCHA error');
+        if (window.onRecaptchaError) window.onRecaptchaError();
+      }
+
+      function onPlannerRecaptchaSuccess(token) {
+        console.log('Planner reCAPTCHA completed');
+        if (window.onPlannerRecaptchaSuccess) window.onPlannerRecaptchaSuccess(token);
+      }
+
+      function onPlannerRecaptchaExpired() {
+        console.log('Planner reCAPTCHA expired');
+        if (window.onPlannerRecaptchaExpired) window.onPlannerRecaptchaExpired();
+      }
+
+      function onPlannerRecaptchaError() {
+        console.log('Planner reCAPTCHA error');
+        if (window.onPlannerRecaptchaError) window.onPlannerRecaptchaError();
       }
     </script>
 
