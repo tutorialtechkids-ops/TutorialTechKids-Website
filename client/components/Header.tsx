@@ -15,107 +15,102 @@ export function Header() {
         isOpen={showLogin} 
         onClose={() => setShowLogin(false)} 
       />
-      <header className="bg-white sticky top-0 z-50">
-        {/* Simple top bar - Only logo */}
+      <header className="bg-white border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            {/* Logo/Brand - Center */}
-            <Link to="/" className="flex items-center group mx-auto">
+          {/* Logo/Brand - Center */}
+          <div className="text-center mb-4">
+            <Link to="/" className="inline-block group">
               <h1 className="text-3xl font-bold text-black group-hover:text-primary transition-colors font-serif">
                 TutorialTechKids
               </h1>
             </Link>
+          </div>
 
-            {/* Mobile Menu Button - Right */}
+          {/* Navigation - Below logo */}
+          <div className="flex items-center justify-between">
+            {/* Desktop Navigation - Center */}
+            <nav className="hidden lg:flex items-center justify-center space-x-8 mx-auto">
+              <Link
+                to="/"
+                className="text-foreground hover:text-primary transition-colors font-medium"
+              >
+                Inicio
+              </Link>
+              <Link
+                to="/redes-sociales"
+                className="text-foreground hover:text-primary transition-colors font-medium"
+              >
+                Redes Sociales
+              </Link>
+              <Link
+                to="/tienda"
+                className="text-foreground hover:text-primary transition-colors font-medium"
+              >
+                Mi Tienda
+              </Link>
+              <Link
+                to="/sobre-nosotros"
+                className="text-foreground hover:text-primary transition-colors font-medium"
+              >
+                Sobre nosotros
+              </Link>
+              <Link
+                to="/contacto"
+                className="text-foreground hover:text-primary transition-colors font-medium"
+              >
+                Contacto
+              </Link>
+            </nav>
+
+            {/* User area - Right */}
+            <div className="hidden lg:flex items-center space-x-4 absolute right-4">
+              {isAuthenticated() ? (
+                <div className="flex items-center space-x-3">
+                  {isAdmin() && (
+                    <div className="flex items-center space-x-1 bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">
+                      <Crown className="h-4 w-4" />
+                      <span>Admin</span>
+                    </div>
+                  )}
+                  <div className="flex items-center space-x-2 text-foreground">
+                    <User className="h-4 w-4" />
+                    <span className="font-medium">{user?.name}</span>
+                  </div>
+                  <button
+                    onClick={logout}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    title="Cerrar sesión"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-3">
+                  <button
+                    onClick={() => setShowLogin(true)}
+                    className="text-foreground hover:text-primary transition-colors font-medium"
+                  >
+                    Iniciar Sesión
+                  </button>
+                  <a
+                    href="https://www.youtube.com/@TutorialTechKids"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg"
+                  >
+                    Comenzar
+                  </a>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               className="lg:hidden text-foreground hover:text-primary transition-colors absolute right-4"
             >
               {showMobileMenu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
-          </div>
-        </div>
-
-        {/* Navigation bar - Black background with everything */}
-        <div className="bg-black">
-          <div className="container mx-auto px-4">
-            <nav className="hidden lg:flex items-center justify-between py-3">
-              {/* Left side - Navigation links */}
-              <div className="flex items-center space-x-8">
-                <Link
-                  to="/"
-                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-                >
-                  Inicio
-                </Link>
-                <Link
-                  to="/redes-sociales"
-                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-                >
-                  Redes Sociales
-                </Link>
-                <Link
-                  to="/tienda"
-                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-                >
-                  Mi Tienda
-                </Link>
-                <Link
-                  to="/sobre-nosotros"
-                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-                >
-                  Sobre nosotros
-                </Link>
-                <Link
-                  to="/contacto"
-                  className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-                >
-                  Contacto
-                </Link>
-              </div>
-
-              {/* Right side - User area */}
-              <div className="flex items-center space-x-4">
-                {isAuthenticated() ? (
-                  <div className="flex items-center space-x-3">
-                    {isAdmin() && (
-                      <div className="flex items-center space-x-1 bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-medium">
-                        <Crown className="h-4 w-4" />
-                        <span>Admin</span>
-                      </div>
-                    )}
-                    <div className="flex items-center space-x-2 text-white">
-                      <User className="h-4 w-4" />
-                      <span className="font-medium">{user?.name}</span>
-                    </div>
-                    <button
-                      onClick={logout}
-                      className="text-gray-300 hover:text-white transition-colors"
-                      title="Cerrar sesión"
-                    >
-                      <LogOut className="h-4 w-4" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-4">
-                    <button
-                      onClick={() => setShowLogin(true)}
-                      className="text-white hover:text-gray-300 transition-colors font-medium text-sm uppercase tracking-wide"
-                    >
-                      Iniciar Sesión
-                    </button>
-                    <a
-                      href="https://www.youtube.com/@TutorialTechKids"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg text-sm uppercase tracking-wide"
-                    >
-                      Comenzar
-                    </a>
-                  </div>
-                )}
-              </div>
-            </nav>
           </div>
         </div>
 
