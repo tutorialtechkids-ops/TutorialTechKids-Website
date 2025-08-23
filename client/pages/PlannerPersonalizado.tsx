@@ -158,7 +158,7 @@ export default function PlannerPersonalizado() {
             
             {/* App Selection */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">What app are you using?</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.app')}</h3>
               <div className="space-y-3">
                 {[
                   "Apple apps other than Goodnotes 6",
