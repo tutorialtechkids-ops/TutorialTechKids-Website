@@ -222,7 +222,7 @@ export default function PlannerPersonalizado() {
 
             {/* Planner Type */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Full or minimalist planner</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.type')}</h3>
               <div className="space-y-3">
                 {[
                   "Full planner (give me everything!)",
