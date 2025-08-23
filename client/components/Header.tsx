@@ -1,21 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { User, LogOut, Crown, Search, Menu, X } from "lucide-react";
+import { User, LogOut, Crown, Menu, X } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
 import { LoginForm } from "./LoginForm";
 
 export function Header() {
   const { user, logout, isAdmin, isAuthenticated } = useUser();
   const [showLogin, setShowLogin] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log("Searching for:", searchQuery);
-    }
-  };
 
   return (
     <>
