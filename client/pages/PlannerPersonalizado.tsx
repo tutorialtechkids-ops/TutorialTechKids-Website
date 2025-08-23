@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 declare global {
   interface Window {
     grecaptcha: any;
-    recaptchaToken: string;
+    onPlannerRecaptchaSuccess: () => void;
+    onPlannerRecaptchaExpired: () => void;
+    onPlannerRecaptchaError: () => void;
   }
 }
 
