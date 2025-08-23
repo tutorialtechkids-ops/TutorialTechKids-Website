@@ -116,41 +116,41 @@ export function Header() {
 
         {/* Mobile Menu */}
         {showMobileMenu && (
-          <div className="lg:hidden bg-black">
+          <div className="lg:hidden bg-white border-t border-border">
             <div className="container mx-auto px-4 py-4">
               {/* Mobile Navigation */}
               <nav className="space-y-4 mb-6">
                 <Link
                   to="/"
-                  className="block text-white hover:text-gray-300 transition-colors font-medium py-2 uppercase tracking-wide"
+                  className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
                   Inicio
                 </Link>
                 <Link
                   to="/redes-sociales"
-                  className="block text-white hover:text-gray-300 transition-colors font-medium py-2 uppercase tracking-wide"
+                  className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
                   Redes Sociales
                 </Link>
                 <Link
                   to="/tienda"
-                  className="block text-white hover:text-gray-300 transition-colors font-medium py-2 uppercase tracking-wide"
+                  className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
                   Mi Tienda
                 </Link>
                 <Link
                   to="/sobre-nosotros"
-                  className="block text-white hover:text-gray-300 transition-colors font-medium py-2 uppercase tracking-wide"
+                  className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
                   Sobre nosotros
                 </Link>
                 <Link
                   to="/contacto"
-                  className="block text-white hover:text-gray-300 transition-colors font-medium py-2 uppercase tracking-wide"
+                  className="block text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setShowMobileMenu(false)}
                 >
                   Contacto
@@ -158,14 +158,14 @@ export function Header() {
               </nav>
 
               {/* Mobile User Area */}
-              <div className="border-t border-gray-600 pt-4">
+              <div className="border-t border-border pt-4">
                 {isAuthenticated() ? (
                   <div className="space-y-3">
-                    <div className="flex items-center space-x-2 text-white">
+                    <div className="flex items-center space-x-2 text-foreground">
                       <User className="h-4 w-4" />
                       <span className="font-medium">{user?.name}</span>
                       {isAdmin() && (
-                        <div className="flex items-center space-x-1 bg-accent/20 text-accent px-2 py-1 rounded-full text-xs font-medium">
+                        <div className="flex items-center space-x-1 bg-accent/10 text-accent px-2 py-1 rounded-full text-xs font-medium">
                           <Crown className="h-3 w-3" />
                           <span>Admin</span>
                         </div>
@@ -176,7 +176,7 @@ export function Header() {
                         logout();
                         setShowMobileMenu(false);
                       }}
-                      className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
+                      className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <LogOut className="h-4 w-4" />
                       <span>Cerrar sesión</span>
@@ -189,7 +189,7 @@ export function Header() {
                         setShowLogin(true);
                         setShowMobileMenu(false);
                       }}
-                      className="block text-white hover:text-gray-300 transition-colors font-medium uppercase tracking-wide"
+                      className="block text-foreground hover:text-primary transition-colors font-medium"
                     >
                       Iniciar Sesión
                     </button>
@@ -197,7 +197,7 @@ export function Header() {
                       href="https://www.youtube.com/@TutorialTechKids"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg text-center uppercase tracking-wide"
+                      className="block bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg text-center"
                       onClick={() => setShowMobileMenu(false)}
                     >
                       Comenzar
