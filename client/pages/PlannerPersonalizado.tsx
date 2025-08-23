@@ -77,6 +77,24 @@ export default function PlannerPersonalizado() {
     setFormData(prev => ({ ...prev, customTabTitles: newTitles }));
   };
 
+  const openColorPicker = (fieldName: string) => {
+    // Crear un input de color temporal
+    const colorInput = document.createElement('input');
+    colorInput.type = 'color';
+    colorInput.style.visibility = 'hidden';
+    colorInput.style.position = 'absolute';
+    document.body.appendChild(colorInput);
+
+    colorInput.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      const hexColor = target.value.substring(1); // Remover el #
+      handleInputChange(fieldName, hexColor);
+      document.body.removeChild(colorInput);
+    });
+
+    colorInput.click();
+  };
+
   useEffect(() => {
     // El idioma ya se detecta automáticamente por el LanguageContext
     // Solo configuramos los callbacks de reCAPTCHA
@@ -178,7 +196,7 @@ export default function PlannerPersonalizado() {
                 <option value="italian">Italiano</option>
                 <option value="german">Deutsch</option>
                 <option value="chinese">中文</option>
-                <option value="japanese">日本語</option>
+                <option value="japanese">��本語</option>
                 <option value="korean">한국어</option>
                 <option value="arabic">العربية</option>
                 <option value="russian">Русский</option>
