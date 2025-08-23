@@ -36,31 +36,31 @@ export function Header() {
                 to="/"
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
-                Inicio
+                {t('nav.home')}
               </Link>
               <Link
                 to="/redes-sociales"
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
-                Redes Sociales
+                {t('nav.social')}
               </Link>
               <Link
                 to="/tienda"
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
-                Mi Tienda
+                {t('nav.store')}
               </Link>
               <Link
                 to="/sobre-nosotros"
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
-                Sobre nosotros
+                {t('nav.about')}
               </Link>
               <Link
                 to="/contacto"
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
-                Contacto
+                {t('nav.contact')}
               </Link>
             </nav>
 
