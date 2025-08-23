@@ -245,7 +245,7 @@ export default function PlannerPersonalizado() {
 
             {/* Planner Color */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Planner color:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.color')}</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
                 {[
                   { name: "Blush", color: "#F8D7DA" },
