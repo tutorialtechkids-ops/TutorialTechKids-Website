@@ -423,24 +423,23 @@ export default function PlannerPersonalizado() {
 
             {/* Paper/Backing Color */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-foreground mb-2">Paper/backing color:</label>
-              <input
-                type="text"
-                value={formData.paperBackingColor}
-                onChange={(e) => handleInputChange("paperBackingColor", e.target.value)}
-                className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <p className="text-sm text-muted-foreground mt-1">
-                Find hex color codes{" "}
-                <a
-                  href="https://www.google.com/search?q=color+picker"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+              <label className="block text-sm font-medium text-foreground mb-2">{t('planner.paperBacking')}</label>
+              <div className="flex items-center space-x-3">
+                <input
+                  type="text"
+                  value={formData.paperBackingColor}
+                  onChange={(e) => handleInputChange("paperBackingColor", e.target.value)}
+                  className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="ffffff"
+                />
+                <button
+                  type="button"
+                  onClick={() => openColorPicker("paperBackingColor")}
+                  className="text-primary hover:underline text-sm"
                 >
-                  here
-                </a>
-              </p>
+                  {t('planner.hexColors')}
+                </button>
+              </div>
             </div>
 
             {/* Header Boxes Color */}
