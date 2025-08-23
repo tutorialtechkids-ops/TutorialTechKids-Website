@@ -4,6 +4,9 @@ import { Send, Shield, MessageCircle, Bot, CheckCircle, X } from "lucide-react";
 declare global {
   interface Window {
     grecaptcha: any;
+    onRecaptchaSuccess: () => void;
+    onRecaptchaExpired: () => void;
+    onRecaptchaError: () => void;
   }
 }
 
