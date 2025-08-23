@@ -183,46 +183,19 @@ export default function PlannerPersonalizado() {
 
             {/* Language Selection */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">¿En qué idioma quieres tu planner?</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.language')}</h3>
               <select
-                value={formData.language}
+                value={language}
                 onChange={(e) => handleInputChange("language", e.target.value)}
                 className="w-full px-4 py-3 border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
               >
-                <option value="spanish">Español</option>
-                <option value="english">English</option>
-                <option value="portuguese">Português</option>
-                <option value="french">Français</option>
-                <option value="italian">Italiano</option>
-                <option value="german">Deutsch</option>
-                <option value="chinese">中文</option>
-                <option value="japanese">日本語</option>
-                <option value="korean">한국어</option>
-                <option value="arabic">العربية</option>
-                <option value="russian">Русский</option>
-                <option value="hindi">हिन्दी</option>
-                <option value="dutch">Nederlands</option>
-                <option value="swedish">Svenska</option>
-                <option value="norwegian">Norsk</option>
-                <option value="danish">Dansk</option>
-                <option value="finnish">Suomi</option>
-                <option value="polish">Polski</option>
-                <option value="czech">Čeština</option>
-                <option value="hungarian">Magyar</option>
-                <option value="romanian">Română</option>
-                <option value="bulgarian">Български</option>
-                <option value="croatian">Hrvatski</option>
-                <option value="serbian">Српски</option>
-                <option value="ukrainian">Українська</option>
-                <option value="greek">Ελληνικά</option>
-                <option value="turkish">Türkçe</option>
-                <option value="hebrew">עברית</option>
-                <option value="thai">ไทย</option>
-                <option value="vietnamese">Tiếng Việt</option>
-                <option value="indonesian">Bahasa Indonesia</option>
-                <option value="malay">Bahasa Melayu</option>
-                <option value="tagalog">Tagalog</option>
-                <option value="swahili">Kiswahili</option>
+                <option value="">-- Seleccionar idioma --</option>
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+                <option value="fr">Français</option>
+                <option value="it">Italiano</option>
+                <option value="de">Deutsch</option>
               </select>
             </div>
 
