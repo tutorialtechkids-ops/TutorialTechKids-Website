@@ -116,44 +116,17 @@ export default function PlannerPersonalizado() {
     const detectedLanguage = languageMap[deviceLanguage.split('-')[0]] || 'english';
     setFormData(prev => ({ ...prev, language: detectedLanguage }));
 
-    let retryCount = 0;
-    const maxRetries = 50;
+    // Simple callback para reCAPTCHA
+    window.onPlannerRecaptchaSuccess = () => {
+      setRecaptchaCompleted(true);
+    };
 
-    const checkRecaptcha = () => {
-      if (retryCount >= maxRetries) {
-        console.log('reCAPTCHA failed to load after maximum retries');
-        return;
-      }
+    window.onPlannerRecaptchaExpired = () => {
+      setRecaptchaCompleted(false);
+    };
 
-      if (window.grecaptcha && window.grecaptcha.render) {
-        try {
-          const container = document.getElementById('planner-recaptcha');
-          if (container && !container.innerHTML) {
-            window.grecaptcha.render('planner-recaptcha', {
-              'sitekey': '6LdoPK8rAAAAACjJnvHEF2McHDnVB5R1oC-Akuk1',
-              'callback': (token: string) => {
-                console.log('reCAPTCHA completed');
-                setRecaptchaCompleted(true);
-              },
-              'expired-callback': () => {
-                console.log('reCAPTCHA expired');
-                setRecaptchaCompleted(false);
-              },
-              'error-callback': () => {
-                console.log('reCAPTCHA error');
-                setRecaptchaCompleted(false);
-              }
-            });
-          }
-        } catch (error) {
-          console.log('Error rendering reCAPTCHA:', error);
-          retryCount++;
-          setTimeout(checkRecaptcha, 100);
-        }
-      } else {
-        retryCount++;
-        setTimeout(checkRecaptcha, 100);
-      }
+    window.onPlannerRecaptchaError = () => {
+      setRecaptchaCompleted(false);
     };
 
     checkRecaptcha();
