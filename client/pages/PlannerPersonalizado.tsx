@@ -201,7 +201,7 @@ export default function PlannerPersonalizado() {
 
             {/* Customization Option */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Select customization option:</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.customization')}</h3>
               <div className="flex flex-col sm:flex-row gap-4">
                 {["Simple", "Advanced"].map((option) => (
                   <button
