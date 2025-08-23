@@ -145,10 +145,10 @@ export default function PlannerPersonalizado() {
           </div>
           
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Personaliza tu Planner Digital
+            {t('planner.title')}
           </h1>
           <p className="text-muted-foreground">
-            Completa este formulario para crear tu planner completamente personalizado
+            {t('planner.subtitle')}
           </p>
         </div>
 
@@ -196,7 +196,7 @@ export default function PlannerPersonalizado() {
                 <option value="italian">Italiano</option>
                 <option value="german">Deutsch</option>
                 <option value="chinese">中文</option>
-                <option value="japanese">��本語</option>
+                <option value="japanese">日本語</option>
                 <option value="korean">한국어</option>
                 <option value="arabic">العربية</option>
                 <option value="russian">Русский</option>
