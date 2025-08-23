@@ -444,30 +444,27 @@ export default function PlannerPersonalizado() {
 
             {/* Header Boxes Color */}
             <div className="mb-8">
-              <label className="block text-sm font-medium text-foreground mb-2">Header boxes color:</label>
+              <label className="block text-sm font-medium text-foreground mb-2">{t('planner.headerBoxes')}</label>
               <div className="flex items-center space-x-3">
                 <input
                   type="text"
                   value={formData.headerBoxesColor}
                   onChange={(e) => handleInputChange("headerBoxesColor", e.target.value)}
                   className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="f7d7f0"
                 />
-                <div 
+                <div
                   className="w-8 h-8 rounded border border-border"
-                  style={{ backgroundColor: `#${formData.headerBoxesColor}` }}
+                  style={{ backgroundColor: formData.headerBoxesColor ? `#${formData.headerBoxesColor}` : '#f7d7f0' }}
                 ></div>
-              </div>
-              <p className="text-sm text-muted-foreground mt-1">
-                Find hex color codes{" "}
-                <a
-                  href="https://www.google.com/search?q=color+picker"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                <button
+                  type="button"
+                  onClick={() => openColorPicker("headerBoxesColor")}
+                  className="text-primary hover:underline text-sm"
                 >
-                  here
-                </a>
-              </p>
+                  {t('planner.hexColors')}
+                </button>
+              </div>
             </div>
 
             {/* Dated Planner Options */}
