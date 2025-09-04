@@ -101,8 +101,7 @@ export default function Index() {
 
           <div className="text-center mt-12">
             <p className="text-muted-foreground bg-muted/50 rounded-xl p-6 max-w-2xl mx-auto">
-              <strong className="text-foreground">¡Y esto es solo el comienzo!</strong> Con el tiempo, 
-              iremos explorando programación y proyectos más avanzados, pero siempre empezando 
+              Con el tiempo, iremos explorando programación y proyectos más avanzados, pero siempre empezando
               con pasos pequeños y fáciles de seguir.
             </p>
           </div>
