@@ -259,12 +259,7 @@ export default function PlannerPersonalizado() {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.app')}</h3>
               <div className="space-y-3">
-                {[
-                  "Apple apps other than Goodnotes 6",
-                  "GoodNotes 6 (make sure you're using Safari browser and not a different browser)",
-                  "Penly for Android",
-                  "Other Android apps"
-                ].map((option, index) => (
+                {appSelectionOptions.map((option, index) => (
                   <label key={index} className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
