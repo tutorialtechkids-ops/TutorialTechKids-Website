@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Send, Shield, MessageCircle, Bot, CheckCircle, X } from "lucide-react";
+import { Send, Shield, Bot, CheckCircle, X } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 declare global {
   interface Window {
@@ -11,6 +12,8 @@ declare global {
 }
 
 export default function Contacto() {
+  const { t, language } = useLanguage();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,13 +44,20 @@ export default function Contacto() {
   };
 
   const generateBotResponse = (name: string, message: string) => {
-    const responses = [
+    const responsesEs = [
       `¡Hola ${name}! 🤖 Gracias por contactar TutorialTechKids. He recibido tu mensaje sobre "${message.substring(0, 50)}..." y lo he enviado a nuestro equipo.`,
       `¡Saludos ${name}! 👋 Tu consulta ha sido registrada exitosamente. Nuestro equipo revisará tu mensaje y te responderá pronto.`,
-      `¡Hola ${name}! ✨ Mensaje recibido. Nos comunicaremos contigo en las próximas 24 horas para ayudarte con tu consulta.`,
-      `¡Hi ${name}! 🚀 Tu mensaje sobre tecnología ha llegado al lugar correcto. Nuestros expertos te responderán muy pronto.`
+      `¡Hola ${name}! ✨ Mensaje recibido. Nos comunicaremos contigo en las próximas 24 horas para ayudarte con tu consulta.`
     ];
-    return responses[Math.floor(Math.random() * responses.length)];
+
+    const responsesEn = [
+      `Hi ${name}! 🤖 Thanks for contacting TutorialTechKids. I received your message about "${message.substring(0,50)}..." and have forwarded it to our team.`,
+      `Hello ${name}! 👋 Your inquiry was received successfully. Our team will review it and get back to you soon.`,
+      `Hi ${name}! ✨ Message received. We'll contact you within 24 hours to help with your request.`
+    ];
+
+    const pool = language === 'es' ? responsesEs : responsesEn;
+    return pool[Math.floor(Math.random() * pool.length)];
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -55,12 +65,12 @@ export default function Contacto() {
     setShowError("");
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setShowError("Por favor, completa todos los campos.");
+      setShowError(language === 'es' ? "Por favor, completa todos los campos." : "Please complete all fields.");
       return;
     }
 
     if (!captchaCompleted) {
-      setShowError("Por favor, completa la verificación reCAPTCHA antes de enviar el mensaje.");
+      setShowError(language === 'es' ? "Por favor, completa la verificación reCAPTCHA antes de enviar el mensaje." : "Please complete the reCAPTCHA verification before sending the message.");
       return;
     }
 
@@ -82,24 +92,22 @@ export default function Contacto() {
                 <CheckCircle className="h-10 w-10 text-green-600" />
               </div>
             </div>
-            
+
             <div className="space-y-4">
-              <h1 className="text-3xl font-bold text-foreground">¡Mensaje Enviado!</h1>
-              <p className="text-lg text-muted-foreground">
-                Gracias por contactarnos. Nuestro bot de soporte responderá pronto.
-              </p>
+              <h1 className="text-3xl font-bold text-foreground">{t('contact.success')}</h1>
+              <p className="text-lg text-muted-foreground">{language === 'es' ? 'Gracias por contactarnos. Nuestro bot de soporte responderá pronto.' : 'Thanks for contacting us. Our support bot will respond shortly.'}</p>
             </div>
 
             <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-6">
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <Bot className="h-6 w-6 text-primary" />
-                <span className="font-semibold text-foreground">Respuesta Automática del Bot</span>
+                <span className="font-semibold text-foreground">{language === 'es' ? 'Respuesta Automática del Bot' : 'Automated Bot Response'}</span>
               </div>
               <div className="bg-white rounded-xl p-4 border-l-4 border-primary mb-4">
                 <p className="text-foreground italic">"{botResponse}"</p>
               </div>
               <p className="text-muted-foreground text-sm text-center">
-                También hemos enviado tu consulta a nuestro equipo humano para una respuesta más detallada.
+                {language === 'es' ? 'También hemos enviado tu consulta a nuestro equipo humano para una respuesta más detallada.' : 'We have also forwarded your inquiry to our human team for a more detailed response.'}
               </p>
             </div>
 
@@ -112,7 +120,7 @@ export default function Contacto() {
               }}
               className="bg-primary hover:bg-brand-blue-light text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:shadow-lg"
             >
-              Enviar Otro Mensaje
+              {language === 'es' ? 'Enviar Otro Mensaje' : 'Send Another Message'}
             </button>
           </div>
         </div>
@@ -124,15 +132,13 @@ export default function Contacto() {
     <main className="min-h-screen bg-white py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
-          
+
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-primary">Contáctanos</span>
+              <span className="text-primary">{t('contact.title')}</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
-              ¿Tienes preguntas, sugerencias o necesitas ayuda? Escríbenos y te responderemos pronto.
-            </p>
+            <p className="text-lg text-muted-foreground">{t('contact.subtitle')}</p>
           </div>
 
           {/* Bot Info */}
@@ -142,18 +148,15 @@ export default function Contacto() {
                 <Bot className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-bold text-foreground mb-2">Soporte Automático 24/7</h3>
-                <p className="text-sm text-muted-foreground">
-                  Tenemos un bot inteligente que responde automáticamente a las consultas más comunes.
-                  También contamos con un bot especializado para la creación de planners digitales.
-                </p>
+                <h3 className="font-bold text-foreground mb-2">{language === 'es' ? 'Soporte Automático 24/7' : 'Automatic Support 24/7'}</h3>
+                <p className="text-sm text-muted-foreground">{language === 'es' ? 'Tenemos un bot inteligente que responde automáticamente a las consultas más comunes. También contamos con un bot especializado para la creación de planners digitales.' : 'We have an intelligent bot that automatically answers common inquiries. We also have a specialized bot for creating digital planners.'}</p>
               </div>
             </div>
           </div>
 
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-8">
             <p className="text-sm text-amber-800">
-              Si tu consulta es urgente o un problema más grave, escríbenos directamente a
+              {language === 'es' ? 'Si tu consulta es urgente o un problema más grave, escríbenos directamente a' : 'If your inquiry is urgent or more serious, write to us directly at'} 
               <a href="mailto:tutorialtechkids@gmail.com" className="underline font-medium ml-1">tutorialtechkids@gmail.com</a>.
             </p>
           </div>
@@ -169,17 +172,17 @@ export default function Contacto() {
             )}
 
             <div className="bg-white border-2 border-gray-100 rounded-2xl p-8 space-y-6">
-              
+
               {/* Name Field */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
-                  Tu Nombre *
+                  {t('contact.name')} *
                 </label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
-                  placeholder="Escribe tu nombre completo"
+                  placeholder={language === 'es' ? 'Escribe tu nombre completo' : 'Enter your full name'}
                   className="w-full px-4 py-3 border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
                   required
                 />
@@ -188,13 +191,13 @@ export default function Contacto() {
               {/* Email Field */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
-                  Tu Correo Electrónico *
+                  {t('contact.email')} *
                 </label>
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  placeholder="ejemplo@correo.com"
+                  placeholder={language === 'es' ? 'ejemplo@correo.com' : 'example@email.com'}
                   className="w-full px-4 py-3 border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
                   required
                 />
@@ -203,12 +206,12 @@ export default function Contacto() {
               {/* Message Field */}
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">
-                  Tu Mensaje *
+                  {t('contact.message')} *
                 </label>
                 <textarea
                   value={formData.message}
                   onChange={(e) => handleInputChange("message", e.target.value)}
-                  placeholder="Escribe tu mensaje, pregunta o sugerencia aquí..."
+                  placeholder={language === 'es' ? 'Escribe tu mensaje, pregunta o sugerencia aquí...' : 'Write your message, question or suggestion here...'}
                   rows={6}
                   className="w-full px-4 py-3 border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                   required
@@ -221,12 +224,9 @@ export default function Contacto() {
                   <div className="flex items-start space-x-3">
                     <Shield className={`h-5 w-5 mt-0.5 ${captchaCompleted ? 'text-green-600' : 'text-primary'}`} />
                     <div className="text-sm">
-                      <p className="text-foreground font-medium mb-1">Verificación de Seguridad</p>
+                      <p className="text-foreground font-medium mb-1">{language === 'es' ? 'Verificación de Seguridad' : 'Security Verification'}</p>
                       <p className={captchaCompleted ? 'text-green-700' : 'text-muted-foreground'}>
-                        {captchaCompleted
-                          ? "✅ Verificación completada exitosamente"
-                          : "Completa el reCAPTCHA que aparece abajo para enviar tu mensaje"
-                        }
+                        {captchaCompleted ? `✅ ${t('contact.success')}` : t('contact.recaptcha')}
                       </p>
                     </div>
                   </div>
@@ -243,7 +243,7 @@ export default function Contacto() {
 
                 {!captchaCompleted && (
                   <p className="text-xs text-muted-foreground text-center">
-                    Si no ves el reCAPTCHA, verifica que JavaScript esté habilitado en tu navegador
+                    {language === 'es' ? 'Si no ves el reCAPTCHA, verifica que JavaScript esté habilitado en tu navegador' : 'If you do not see the reCAPTCHA, ensure JavaScript is enabled in your browser'}
                   </p>
                 )}
               </div>
@@ -254,7 +254,7 @@ export default function Contacto() {
                 className="w-full bg-primary hover:bg-brand-blue-light text-white py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center justify-center space-x-2"
               >
                 <Send className="h-5 w-5" />
-                <span>Enviar Mensaje</span>
+                <span>{t('contact.submit')}</span>
               </button>
             </div>
           </form>
