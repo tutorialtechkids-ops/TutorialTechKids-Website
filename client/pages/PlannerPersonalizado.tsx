@@ -78,7 +78,6 @@ export default function PlannerPersonalizado() {
   };
 
   const openColorPicker = (fieldName: string) => {
-    // Crear un input de color temporal
     const colorInput = document.createElement('input');
     colorInput.type = 'color';
     colorInput.style.visibility = 'hidden';
@@ -87,13 +86,113 @@ export default function PlannerPersonalizado() {
 
     colorInput.addEventListener('change', (e) => {
       const target = e.target as HTMLInputElement;
-      const hexColor = target.value.substring(1); // Remover el #
+      const hexColor = target.value.substring(1);
       handleInputChange(fieldName, hexColor);
       document.body.removeChild(colorInput);
     });
 
     colorInput.click();
   };
+
+  const ua = navigator.userAgent || '';
+  const isInApp = /(FBAN|FBAV|Instagram|Line|Twitter|WhatsApp|MicroMessenger|GSA)/i.test(ua);
+  const browserName = /CriOS|Chrome/i.test(ua)
+    ? 'Chrome'
+    : /Safari/i.test(ua) && !/Chrome|CriOS/i.test(ua)
+    ? 'Safari'
+    : /Firefox/i.test(ua)
+    ? 'Firefox'
+    : /Edg/i.test(ua)
+    ? 'Edge'
+    : 'Navegador';
+
+  const appOptions = language === 'es'
+    ? [
+        'Página divisoria estándar',
+        'YouTube', 'Instagram', 'WhatsApp', 'Threads', 'TikTok', 'Facebook', 'X/Twitter',
+        'Google Calendar', 'Apple Calendar', 'Gmail', 'Google Drive', 'Mapas', 'Fotos',
+        'Spotify', 'Música', 'Libros', 'Kindle', 'Mensajes', 'Teléfono',
+        'Safari', 'Chrome', 'Edge', 'Firefox',
+        'GoodNotes', 'Notas de Apple', 'Penly', 'Notion', 'Trello', 'Pinterest', 'Snapchat', 'Discord'
+      ]
+    : [
+        'Standard divider page',
+        'YouTube', 'Instagram', 'WhatsApp', 'Threads', 'TikTok', 'Facebook', 'X/Twitter',
+        'Google Calendar', 'Apple Calendar', 'Gmail', 'Google Drive', 'Maps', 'Photos',
+        'Spotify', 'Music', 'Books', 'Kindle', 'Messages', 'Phone',
+        'Safari', 'Chrome', 'Edge', 'Firefox',
+        'GoodNotes', 'Apple Notes', 'Penly', 'Notion', 'Trello', 'Pinterest', 'Snapchat', 'Discord'
+      ];
+
+  const plannerTypeOptions = language === 'es'
+    ? ['Planner completo (¡todo!)', 'Planner minimalista (sin plantillas extra)']
+    : ['Full planner (give me everything!)', 'Minimalist planner (no extra templates)'];
+
+  const appSelectionOptions = language === 'es'
+    ? [
+        'Apps de Apple distintas a Goodnotes 6',
+        'GoodNotes 6 (asegúrate de usar Safari y no otro navegador)',
+        'Penly para Android',
+        'Otras apps de Android'
+      ]
+    : [
+        'Apple apps other than Goodnotes 6',
+        "GoodNotes 6 (make sure you're using Safari browser and not a different browser)",
+        'Penly for Android',
+        'Other Android apps'
+      ];
+
+  const colorPresets = (
+    language === 'es'
+      ? [
+          { name: 'Rosa suave', color: '#F8D7DA' },
+          { name: 'Negro', color: '#000000' },
+          { name: 'Azul', color: '#ADD8E6' },
+          { name: 'Verde', color: '#90EE90' },
+          { name: 'Rosa', color: '#FFB6C1' },
+          { name: 'Morado', color: '#DDA0DD' }
+        ]
+      : [
+          { name: 'Blush', color: '#F8D7DA' },
+          { name: 'Black', color: '#000000' },
+          { name: 'Blue', color: '#ADD8E6' },
+          { name: 'Green', color: '#90EE90' },
+          { name: 'Pink', color: '#FFB6C1' },
+          { name: 'Purple', color: '#DDA0DD' }
+        ]
+  );
+
+  const months = language === 'es'
+    ? ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+    : ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  const weekStartOptions = language === 'es' ? ['Lunes', 'Domingo'] : ['Monday', 'Sunday'];
+
+  const tabColorOptions = language === 'es' ? ['Pestañas arcoíris', 'Pestañas crema'] : ['Rainbow tabs', 'Cream tabs'];
+
+  const tabFontOptions = language === 'es' ? ['Negro', 'Blanco'] : ['Black', 'White'];
+
+  const calendarOptions = language === 'es'
+    ? ['Ninguno', 'Enlaces de Apple para dispositivos Apple', 'Enlaces de Google para dispositivos Apple', 'Enlaces de Google para Android']
+    : ['None', 'Apple calendar links for Apple devices', 'Google calendar links for Apple devices', 'Google calendar links for Android devices'];
+
+  const datedOptions = language === 'es'
+    ? [
+        'Un año con fechas: 2025',
+        'Dos años con fechas: Ene 2025 - Dic 2026',
+        'Un año con fechas: 2026',
+        'Dos años con fechas: Ene 2026 - Dic 2027',
+        'Un año con fechas: 2027',
+        'Año personalizado (disponible 2025-2030)'
+      ]
+    : [
+        'One year dated: 2025',
+        'Two year dated: Jan 2025 - Dec 2026',
+        'One year dated: 2026',
+        'Two year dated: Jan 2026 - Dec 2027',
+        'One year dated: 2027',
+        'Custom year (2025-2030 available)'
+      ];
 
   useEffect(() => {
     // El idioma ya se detecta automáticamente por el LanguageContext
