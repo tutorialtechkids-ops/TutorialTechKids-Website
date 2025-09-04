@@ -126,7 +126,13 @@ export function Header() {
         {showMobileMenu && (
           <div className="lg:hidden bg-white border-t border-border">
             <div className="container mx-auto px-4 py-4">
-              {/* Mobile Navigation */}
+              {/* Mobile Navigation - brand centered on top */}
+              <div className="text-center mb-4">
+                <Link to="/" className="inline-block">
+                  <h2 className="text-2xl font-bold">TutorialTechKids</h2>
+                </Link>
+              </div>
+
               <nav className="space-y-4 mb-6">
                 <Link
                   to="/"
