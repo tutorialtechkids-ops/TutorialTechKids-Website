@@ -1,4 +1,4 @@
-import { Youtube, Instagram, Facebook, Twitter, MessageCircle, ExternalLink } from "lucide-react";
+import { Youtube, Instagram, Facebook, Twitter, MessageCircle, ExternalLink, AtSign } from "lucide-react";
 
 export function SocialMediaSection() {
   const socialLinks = [
@@ -13,10 +13,26 @@ export function SocialMediaSection() {
     {
       name: "Instagram",
       icon: Instagram,
-      url: "https://instagram.com/tutorialtechkids",
+      url: "https://www.instagram.com/tutorialtechkids?igsh=a2tyeW4zdXFobGJy&utm_source=qr",
       description: "Tips rápidos y contenido visual",
       color: "bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600",
       followers: "Síguenos"
+    },
+    {
+      name: "WhatsApp Canal",
+      icon: MessageCircle,
+      url: "https://whatsapp.com/channel/0029Vb6jo6QDJ6Guhth6rS1v",
+      description: "Únete a nuestro canal en WhatsApp",
+      color: "bg-green-500 hover:bg-green-600",
+      followers: "Unirse"
+    },
+    {
+      name: "Threads",
+      icon: AtSign,
+      url: "https://www.threads.net/@tutorialtechkids?igshid=NTc4MTIwNjQ2YQ==",
+      description: "Conversaciones y actualizaciones",
+      color: "bg-black hover:bg-gray-800",
+      followers: "Seguir"
     },
     {
       name: "TikTok",
