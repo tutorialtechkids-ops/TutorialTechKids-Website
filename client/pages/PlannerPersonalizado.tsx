@@ -629,7 +629,7 @@ export default function PlannerPersonalizado() {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.startDate')}</h3>
               <div className="space-y-3">
-                {["Monday", "Sunday"].map((option) => (
+                {weekStartOptions.map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
