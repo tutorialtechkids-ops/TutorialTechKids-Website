@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { User, LogOut, Crown, Menu, X, ShoppingCart } from "lucide-react";
+import { User, LogOut, Crown, Menu, X, ShoppingCart, Youtube, Instagram, MessageCircle, AtSign } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import { LoginForm } from "./LoginForm";
