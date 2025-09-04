@@ -318,10 +318,7 @@ export default function PlannerPersonalizado() {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.type')}</h3>
               <div className="space-y-3">
-                {[
-                  "Full planner (give me everything!)",
-                  "Minimalist planner (no extra templates)"
-                ].map((option) => (
+                {plannerTypeOptions.map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
