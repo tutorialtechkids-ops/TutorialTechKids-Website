@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Send, Shield, Bot, CheckCircle, X } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { ChatWidget } from "../components/ChatWidget";
 
 declare global {
   interface Window {
