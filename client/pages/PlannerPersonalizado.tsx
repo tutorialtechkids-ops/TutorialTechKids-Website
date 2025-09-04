@@ -717,7 +717,7 @@ export default function PlannerPersonalizado() {
                     onChange={(e) => handleInputChange("tabTitles", e.target.value)}
                     className="text-primary focus:ring-primary"
                   />
-                  <span className="text-foreground">1-12 tabs with dividers (recommended for beginners):</span>
+                  <span className="text-foreground">{language === 'es' ? '1-12 pestañas con divisores (recomendado para principiantes):' : '1-12 tabs with dividers (recommended for beginners):'}</span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -728,7 +728,7 @@ export default function PlannerPersonalizado() {
                     onChange={(e) => handleInputChange("tabTitles", e.target.value)}
                     className="text-primary focus:ring-primary"
                   />
-                  <span className="text-foreground">Custom tab titles and links:</span>
+                  <span className="text-foreground">{language === 'es' ? 'Títulos de pestañas y enlaces personalizados:' : 'Custom tab titles and links:'}</span>
                 </label>
               </div>
 
@@ -736,18 +736,20 @@ export default function PlannerPersonalizado() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {Array(12).fill(0).map((_, index) => (
                     <div key={index} className="flex items-center space-x-2">
-                      <label className="text-sm font-medium text-foreground w-20">
-                        Tab name {index + 1}:
+                      <label className="text-sm font-medium text-foreground w-28">
+                        {language === 'es' ? 'Nombre pestaña' : 'Tab name'} {index + 1}:
                       </label>
                       <input
                         type="text"
-                        placeholder={`TAB ${index + 1}`}
+                        placeholder={`${language === 'es' ? 'PESTAÑA' : 'TAB'} ${index + 1}`}
                         value={formData.customTabTitles[index]}
                         onChange={(e) => handleCustomTabTitleChange(index, e.target.value)}
                         className="flex-1 px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
                       />
                       <select className="px-2 py-2 border border-border rounded-lg text-sm">
-                        <option>Standard divider page</option>
+                        {appOptions.map((app) => (
+                          <option key={app} value={app}>{app}</option>
+                        ))}
                       </select>
                     </div>
                   ))}
