@@ -619,10 +619,7 @@ export default function PlannerPersonalizado() {
                 onChange={(e) => handleInputChange("startMonth", e.target.value)}
                 className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               >
-                {[
-                  "January", "February", "March", "April", "May", "June",
-                  "July", "August", "September", "October", "November", "December"
-                ].map((month) => (
+                {months.map((month) => (
                   <option key={month} value={month.toLowerCase()}>{month}</option>
                 ))}
               </select>
