@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useState } from 'react';
 import { ShoppingBag, Star, Check, Palette, Smartphone, Calendar, Download, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PaymentButton } from "../components/PaymentButton";
