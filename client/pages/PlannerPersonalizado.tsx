@@ -649,7 +649,7 @@ export default function PlannerPersonalizado() {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.tabColors')}</h3>
               <div className="space-y-3">
-                {["Rainbow tabs", "Cream tabs"].map((option) => (
+                {tabColorOptions.map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -671,7 +671,7 @@ export default function PlannerPersonalizado() {
                     onChange={(e) => handleInputChange("tabColors", e.target.value)}
                     className="text-primary focus:ring-primary"
                   />
-                  <span className="text-foreground">Custom tab colors</span>
+                  <span className="text-foreground">{language === 'es' ? 'Colores de pestañas personalizados' : 'Custom tab colors'}</span>
                 </label>
                 {formData.tabColors === "custom" && (
                   <input
