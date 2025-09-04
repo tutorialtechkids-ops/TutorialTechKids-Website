@@ -136,7 +136,7 @@ export default function Contacto() {
           </div>
 
           {/* Bot Info */}
-          <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-6 mb-8">
+          <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-6 mb-3">
             <div className="flex items-start space-x-4">
               <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
                 <Bot className="h-6 w-6 text-primary" />
@@ -144,11 +144,18 @@ export default function Contacto() {
               <div>
                 <h3 className="font-bold text-foreground mb-2">Soporte Automático 24/7</h3>
                 <p className="text-sm text-muted-foreground">
-                  Tenemos un bot inteligente que responde automáticamente a las consultas más comunes. 
+                  Tenemos un bot inteligente que responde automáticamente a las consultas más comunes.
                   También contamos con un bot especializado para la creación de planners digitales.
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-8">
+            <p className="text-sm text-amber-800">
+              Si tu consulta es urgente o un problema más grave, escríbenos directamente a
+              <a href="mailto:tutorialtechkids@gmail.com" className="underline font-medium ml-1">tutorialtechkids@gmail.com</a>.
+            </p>
           </div>
 
           {/* Contact Form */}
