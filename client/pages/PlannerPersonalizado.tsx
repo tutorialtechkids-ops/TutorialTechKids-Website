@@ -826,7 +826,7 @@ export default function PlannerPersonalizado() {
                 className="bg-primary hover:bg-brand-blue-light disabled:bg-muted disabled:text-muted-foreground text-primary-foreground px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center space-x-2 mx-auto"
               >
                 <Check className="h-5 w-5" />
-                <span>Generar mi Planner Personalizado</span>
+                <span>{t('planner.submit')}</span>
               </button>
             </div>
           </div>
