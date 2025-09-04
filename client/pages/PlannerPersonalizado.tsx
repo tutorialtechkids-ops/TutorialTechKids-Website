@@ -578,14 +578,7 @@ export default function PlannerPersonalizado() {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.dates')}</h3>
               <div className="space-y-3">
-                {[
-                  "One year dated: 2025",
-                  "Two year dated: Jan 2025 - Dec 2026",
-                  "One year dated: 2026",
-                  "Two year dated: Jan 2026 - Dec 2027",
-                  "One year dated: 2027",
-                  "Custom year (2025-2030 available)"
-                ].map((option) => (
+                {datedOptions.map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -600,10 +593,10 @@ export default function PlannerPersonalizado() {
                 ))}
               </div>
 
-              {formData.dated === "Custom year (2025-2030 available)" && (
+              {formData.dated === (language === 'es' ? 'Año personalizado (disponible 2025-2030)' : 'Custom year (2025-2030 available)') && (
                 <div className="mt-4 ml-6">
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Enter custom year (2025-2030):
+                    {language === 'es' ? 'Ingresa el año personalizado (2025-2030):' : 'Enter custom year (2025-2030):'}
                   </label>
                   <input
                     type="number"
