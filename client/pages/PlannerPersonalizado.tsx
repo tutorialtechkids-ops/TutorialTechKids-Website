@@ -796,8 +796,8 @@ export default function PlannerPersonalizado() {
               <div className={`rounded-xl p-4 mb-4 ${recaptchaCompleted ? 'bg-green-50 border border-green-200' : 'bg-muted/50'}`}>
                 <p className={`text-sm font-medium mb-2 ${recaptchaCompleted ? 'text-green-700' : 'text-foreground'}`}>
                   {recaptchaCompleted
-                    ? "✅ Verificación completada - ¡Listo para generar tu planner!"
-                    : "Completa la verificación reCAPTCHA para generar tu planner:"
+                    ? (language === 'es' ? "✅ Verificación completada - ¡Listo para generar tu planner!" : "✅ Verification completed - ready to generate your planner!")
+                    : t('planner.recaptcha')
                   }
                 </p>
               </div>
