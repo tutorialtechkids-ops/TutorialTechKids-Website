@@ -85,9 +85,15 @@ export function Header() {
                   >
                     <LogOut className="h-4 w-4" />
                   </button>
+                  <Link to="/carrito" className="text-foreground hover:text-primary transition-colors ml-2" title="Carrito">
+                    <ShoppingCart className="h-5 w-5" />
+                  </Link>
                 </div>
               ) : (
                 <div className="flex items-center space-x-3">
+                  <Link to="/carrito" className="text-foreground hover:text-primary transition-colors mr-2" title="Carrito">
+                    <ShoppingCart className="h-5 w-5" />
+                  </Link>
                   <button
                     onClick={() => setShowLogin(true)}
                     className="text-foreground hover:text-primary transition-colors font-medium"
