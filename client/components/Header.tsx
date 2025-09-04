@@ -185,28 +185,39 @@ export function Header() {
                         </div>
                       )}
                     </div>
-                    <button
-                      onClick={() => {
-                        logout();
-                        setShowMobileMenu(false);
-                      }}
-                      className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      <span>Cerrar sesión</span>
-                    </button>
+                    <div className="flex items-center space-x-4">
+                      <Link to="/carrito" className="text-foreground hover:text-primary transition-colors">
+                        <ShoppingCart className="h-5 w-5" />
+                      </Link>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setShowMobileMenu(false);
+                        }}
+                        className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        <span>Cerrar sesión</span>
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <button
-                      onClick={() => {
-                        setShowLogin(true);
-                        setShowMobileMenu(false);
-                      }}
-                      className="block text-foreground hover:text-primary transition-colors font-medium"
-                    >
-                      {t('nav.login')}
-                    </button>
+                    <div className="flex items-center justify-center space-x-4">
+                      <Link to="/carrito" className="text-foreground hover:text-primary transition-colors">
+                        <ShoppingCart className="h-5 w-5" />
+                      </Link>
+                      <button
+                        onClick={() => {
+                          setShowLogin(true);
+                          setShowMobileMenu(false);
+                        }}
+                        className="block text-foreground hover:text-primary transition-colors font-medium"
+                      >
+                        {t('nav.login')}
+                      </button>
+                    </div>
+
                     <a
                       href="https://www.youtube.com/@TutorialTechKids"
                       target="_blank"
