@@ -125,6 +125,7 @@ export default function Contacto() {
             </button>
           </div>
         </div>
+        <ChatWidget />
       </main>
     );
   }
@@ -262,6 +263,7 @@ export default function Contacto() {
 
         </div>
       </div>
+      <ChatWidget />
     </main>
   );
 }
