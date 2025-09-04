@@ -86,6 +86,22 @@ export function Header() {
 
             {/* User area - Right */}
             <div className="hidden lg:flex items-center space-x-4 absolute right-4">
+              <select
+                onChange={(e) => {
+                  try { localStorage.setItem('preferred-language', e.target.value); window.location.reload(); } catch (err) {}
+                }}
+                defaultValue={localStorage.getItem('preferred-language') || ''}
+                className="px-2 py-1 border border-border rounded-lg bg-white text-sm mr-2"
+                aria-label="Language selector"
+              >
+                <option value="">Lang</option>
+                <option value="es">ES</option>
+                <option value="en">EN</option>
+                <option value="pt">PT</option>
+                <option value="fr">FR</option>
+                <option value="it">IT</option>
+                <option value="de">DE</option>
+              </select>
               {isAuthenticated() ? (
                 <div className="flex items-center space-x-3">
                   {isAdmin() && (
