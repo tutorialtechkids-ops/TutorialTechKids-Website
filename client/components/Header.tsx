@@ -167,6 +167,22 @@ export function Header() {
                 <Link to="/" className="inline-block">
                   <h2 className="text-2xl font-bold">TutorialTechKids</h2>
                 </Link>
+                <div className="mt-2">
+                  <select
+                    onChange={(e) => { try { localStorage.setItem('preferred-language', e.target.value); window.location.reload(); } catch (err) {} }}
+                    defaultValue={localStorage.getItem('preferred-language') || ''}
+                    className="px-3 py-2 border border-border rounded-lg bg-white text-sm"
+                    aria-label="Language selector mobile"
+                  >
+                    <option value="">Lang</option>
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                    <option value="pt">PT</option>
+                    <option value="fr">FR</option>
+                    <option value="it">IT</option>
+                    <option value="de">DE</option>
+                  </select>
+                </div>
               </div>
 
               <nav className="space-y-4 mb-6">
