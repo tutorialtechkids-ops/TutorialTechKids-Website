@@ -65,6 +65,26 @@ export function Header() {
               </Link>
             </nav>
 
+            {/* Social links under brand */}
+            <div className="hidden lg:flex mt-3 flex items-center justify-center space-x-4 mr-8">
+              <a href="https://www.youtube.com/@TutorialTechKids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+                <Youtube className="h-4 w-4" />
+                <span>YouTube</span>
+              </a>
+              <a href="https://www.instagram.com/tutorialtechkids?igsh=a2tyeW4zdXFobGJy&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+                <Instagram className="h-4 w-4" />
+                <span>Instagram</span>
+              </a>
+              <a href="https://www.threads.net/@tutorialtechkids?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+                <AtSign className="h-4 w-4" />
+                <span>Threads</span>
+              </a>
+              <a href="https://whatsapp.com/channel/0029Vb6jo6QDJ6Guhth6rS1v" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+                <MessageCircle className="h-4 w-4" />
+                <span>WhatsApp</span>
+              </a>
+            </div>
+
             {/* User area - Right */}
             <div className="hidden lg:flex items-center space-x-4 absolute right-4">
               <select
