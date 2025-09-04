@@ -535,6 +535,10 @@ export default function PlannerPersonalizado() {
                   className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="ffffff"
                 />
+                <div
+                  className="w-8 h-8 rounded border border-border"
+                  style={{ backgroundColor: formData.paperBackingColor ? `#${formData.paperBackingColor}` : '#ffffff' }}
+                ></div>
                 <button
                   type="button"
                   onClick={() => openColorPicker("paperBackingColor")}
