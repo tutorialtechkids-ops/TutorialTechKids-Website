@@ -338,14 +338,7 @@ export default function PlannerPersonalizado() {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.color')}</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
-                {[
-                  { name: "Blush", color: "#F8D7DA" },
-                  { name: "Black", color: "#000000" },
-                  { name: "Blue", color: "#ADD8E6" },
-                  { name: "Green", color: "#90EE90" },
-                  { name: "Pink", color: "#FFB6C1" },
-                  { name: "Purple", color: "#DDA0DD" }
-                ].map((colorOption) => (
+                {colorPresets.map((colorOption) => (
                   <label key={colorOption.name} className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
@@ -356,14 +349,14 @@ export default function PlannerPersonalizado() {
                       className="text-primary focus:ring-primary"
                     />
                     <span className="text-foreground">{colorOption.name}:</span>
-                    <div 
+                    <div
                       className="w-6 h-6 rounded border border-border"
                       style={{ backgroundColor: colorOption.color }}
                     ></div>
                   </label>
                 ))}
               </div>
-              
+
               <div className="space-y-3">
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -374,27 +367,46 @@ export default function PlannerPersonalizado() {
                     onChange={(e) => handleInputChange("plannerColor", e.target.value)}
                     className="text-primary focus:ring-primary"
                   />
-                  <span className="text-foreground">Custom planner color</span>
+                  <span className="text-foreground">{language === 'es' ? 'Color personalizado del planner' : 'Custom planner color'}</span>
                 </label>
                 {formData.plannerColor === "custom" && (
-                  <input
-                    type="text"
-                    placeholder="ffffff"
-                    value={formData.customPlannerColor}
-                    onChange={(e) => handleInputChange("customPlannerColor", e.target.value)}
-                    className="ml-6 px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
+                  <div className="flex items-center gap-3 ml-6">
+                    <input
+                      type="text"
+                      placeholder="ffffff"
+                      value={formData.customPlannerColor}
+                      onChange={(e) => handleInputChange("customPlannerColor", e.target.value)}
+                      className="px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                    <div
+                      className="w-8 h-8 rounded border border-border"
+                      style={{ backgroundColor: formData.customPlannerColor ? `#${formData.customPlannerColor}` : '#ffffff' }}
+                      aria-label={language === 'es' ? 'Color seleccionado' : 'Selected color'}
+                    ></div>
+                    <button
+                      type="button"
+                      onClick={() => openColorPicker('customPlannerColor')}
+                      className="text-primary hover:underline text-sm"
+                    >
+                      {language === 'es' ? 'Abrir selector de color' : 'Open color picker'}
+                    </button>
+                  </div>
                 )}
                 <p className="text-sm text-muted-foreground ml-6">
-                  Find hex color codes{" "}
+                  {language === 'es' ? 'Encuentra códigos de color hex ' : 'Find hex color codes '}
                   <a
                     href="https://www.google.com/search?q=color+picker"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:underline"
                   >
-                    here
+                    {language === 'es' ? 'aquí' : 'here'}
                   </a>.
+                </p>
+                <p className="text-xs text-muted-foreground ml-6">
+                  {isInApp
+                    ? (language === 'es' ? 'Parece que estás usando un navegador dentro de una app. Para una mejor experiencia con el selector de color, te recomendamos usar Safari o Chrome.' : 'It looks like you are using an in-app browser. For a better color picker experience, we recommend Safari or Chrome.')
+                    : (language === 'es' ? `Navegador detectado: ${browserName}.` : `Detected browser: ${browserName}.`)}
                 </p>
               </div>
             </div>
