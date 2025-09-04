@@ -775,12 +775,7 @@ export default function PlannerPersonalizado() {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-foreground mb-4">{t('planner.calendar')}</h3>
               <div className="space-y-3">
-                {[
-                  "None",
-                  "Apple calendar links for Apple devices",
-                  "Google calendar links for Apple devices",
-                  "Google calendar links for Android devices"
-                ].map((option) => (
+                {calendarOptions.map((option) => (
                   <label key={option} className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="radio"
