@@ -229,12 +229,12 @@ export default function PlannerPersonalizado() {
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <Link 
-            to="/tienda" 
+          <Link
+            to="/tienda"
             className="inline-flex items-center space-x-2 text-primary hover:text-brand-blue-light transition-colors mb-6"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Volver a la tienda</span>
+            <span>{language === 'es' ? 'Volver a la tienda' : 'Back to shop'}</span>
           </Link>
           
           <div className="flex justify-center mb-4">
