@@ -3,6 +3,7 @@ import { ShoppingBag, Star, Check, Palette, Smartphone, Calendar, Download, Crow
 import { Link } from "react-router-dom";
 import { PaymentButton } from "../components/PaymentButton";
 import { useUser } from "../contexts/UserContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Tienda() {
   const { isAdmin, isAuthenticated } = useUser();
