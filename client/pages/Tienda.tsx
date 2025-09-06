@@ -7,6 +7,23 @@ import { useUser } from "../contexts/UserContext";
 export default function Tienda() {
   const { isAdmin, isAuthenticated } = useUser();
   const [showPayment, setShowPayment] = useState(false);
+  const { t, language } = useLanguage();
+
+  // Restrict access for non-admin users: show a "working on this" message
+  if (!(isAuthenticated() && isAdmin())) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-white to-accent/5 p-8">
+        <div className="text-center space-y-6 max-w-2xl">
+          <h1 className="text-4xl font-bold text-foreground">{language === 'es' ? 'Estamos trabajando en esta página' : 'We are working on this page'}</h1>
+          <p className="text-lg text-muted-foreground">
+            {language === 'es'
+              ? 'Esta sección estará disponible pronto. ¡Gracias por tu paciencia!'
+              : 'This section will be available soon. Thank you for your patience!'}
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   const handlePurchase = () => {
     // Admin bypass - go directly to planner form
