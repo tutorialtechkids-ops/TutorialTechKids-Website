@@ -16,8 +16,17 @@ import RedesSociales from "./pages/RedesSociales";
 import Gracias from "./pages/Gracias";
 import Contacto from "./pages/Contacto";
 import SobreNosotros from "./pages/SobreNosotros";
+import Politica from "./pages/Politica";
 import { PlaceholderPage } from "./components/PlaceholderPage";
 import { BookOpen, Phone, Users, Palette } from "lucide-react";
+
+// Small helper to redirect to YouTube for /tutoriales route
+function RedirectToYouTube() {
+  useEffect(() => {
+    window.location.href = 'https://www.youtube.com/@TutorialTechKids';
+  }, []);
+  return null;
+}
 
 function App() {
   useEffect(() => {
