@@ -44,19 +44,31 @@ export function PlaceholderPage({
               <p className="text-sm text-muted-foreground text-center">
                 ¿Quieres que prioricemos esta página? ¡Déjanos saber!
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link 
-                  to="/"
-                  className="flex items-center justify-center space-x-2 bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:shadow-lg"
-                >
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                <Link to="/politica" className="flex items-center justify-center space-x-2 bg-primary/10 hover:bg-primary/20 text-foreground px-4 py-3 rounded-xl font-medium transition-all duration-200">
+                  <span>Política</span>
+                </Link>
+
+                <Link to="/privacidad" className="flex items-center justify-center space-x-2 bg-primary/10 hover:bg-primary/20 text-foreground px-4 py-3 rounded-xl font-medium transition-all duration-200">
+                  <span>Privacidad</span>
+                </Link>
+
+                <Link to="/cookies" className="flex items-center justify-center space-x-2 bg-primary/10 hover:bg-primary/20 text-foreground px-4 py-3 rounded-xl font-medium transition-all duration-200">
+                  <span>Cookies</span>
+                </Link>
+
+                <Link to="/terminos" className="flex items-center justify-center space-x-2 bg-primary/10 hover:bg-primary/20 text-foreground px-4 py-3 rounded-xl font-medium transition-all duration-200">
+                  <span>Términos</span>
+                </Link>
+
+                <a href="https://www.youtube.com/@TutorialTechKids" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2 bg-accent hover:bg-brand-purple-light text-white px-4 py-3 rounded-xl font-medium transition-all duration-200">
+                  <span>Tutoriales (YouTube)</span>
+                </a>
+
+                <Link to="/" className="flex items-center justify-center space-x-2 bg-muted hover:bg-muted/80 text-foreground px-4 py-3 rounded-xl font-medium transition-all duration-200">
                   <ArrowLeft className="h-4 w-4" />
                   <span>Volver al inicio</span>
-                </Link>
-                <Link 
-                  to="/contacto"
-                  className="flex items-center justify-center space-x-2 bg-accent hover:bg-brand-purple-light text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:shadow-lg"
-                >
-                  <span>Contactar</span>
                 </Link>
               </div>
             </div>
