@@ -102,6 +102,18 @@ function App() {
                   }
                 />
 
+                {/* Tutoriales route */}
+                <Route
+                  path="/tutoriales"
+                  element={
+                    <PlaceholderPage
+                      title="Tutoriales"
+                      description="Explora nuestros tutoriales prácticos y mini-hacks para niños y jóvenes."
+                      icon={<BookOpen className="h-12 w-12 text-accent" />}
+                    />
+                  }
+                />
+
                 {/* Catch all route for 404 */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
