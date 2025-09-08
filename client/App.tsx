@@ -20,6 +20,17 @@ import { PlaceholderPage } from "./components/PlaceholderPage";
 import { BookOpen, Phone, Users, Palette } from "lucide-react";
 
 function App() {
+  useEffect(() => {
+    try {
+      const deviceLang = (navigator.language || 'en').split('-')[0];
+      if (!localStorage.getItem('preferred-language')) {
+        localStorage.setItem('preferred-language', deviceLang);
+      }
+    } catch (e) {
+      // ignore in non-browser environments
+    }
+  }, []);
+
   return (
     <LanguageProvider>
       <UserProvider>
