@@ -25,6 +25,13 @@ const ADMIN_EMAILS = [
   // Add more admin emails as needed
 ];
 
+// Known user emails for demo purposes. In production, replace this with server-side verification.
+const KNOWN_EMAILS = [
+  ...ADMIN_EMAILS,
+  'cliente@tutorialtechkids.com',
+  'test@tutorialtechkids.com'
+];
+
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
