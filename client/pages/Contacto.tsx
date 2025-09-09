@@ -104,14 +104,31 @@ export default function Contacto() {
     setInput("");
     setAttachedImages([]);
 
-    // Immediate simulated reply (can be replaced by real AI backend)
-    setTimeout(() => {
-      let reply = language === 'es' ? 'Gracias por tu mensaje. Aquí tienes una respuesta rápida:' : 'Thanks for your message. Here is a quick answer:';
-      if (images.length) {
-        reply += language === 'es' ? ' He recibido las imágenes, revisaré y te doy una respuesta.' : ' I received the images, I will review and reply.';
+    // Send message to server-side AI endpoint
+    (async () => {
+      // add temporary typing indicator
+      setMessages(prev => [...prev, { from: 'bot', text: language === 'es' ? 'Escribiendo...' : 'Thinking...' }]);
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ input: text, images }),
+        });
+        const data = await res.json();
+
+        // replace typing indicator with actual reply
+        setMessages(prev => {
+          const withoutTyping = prev.slice(0, -1);
+          const replyText = data?.output ?? (data?.error ?? (language === 'es' ? 'Error al obtener respuesta.' : 'Error getting response.'));
+          return [...withoutTyping, { from: 'bot', text: replyText }];
+        });
+      } catch (err) {
+        setMessages(prev => {
+          const withoutTyping = prev.slice(0, -1);
+          return [...withoutTyping, { from: 'bot', text: language === 'es' ? 'Error al contactar al servicio de IA.' : 'Error contacting AI service.' }];
+        });
       }
-      setMessages(prev => [...prev, { from: 'bot', text: reply }]);
-    }, 300);
+    })();
   };
 
   return (
