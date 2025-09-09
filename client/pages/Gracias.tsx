@@ -20,7 +20,7 @@ export default function Gracias() {
               <span className="text-primary">¡Gracias por tu</span> <span className="text-accent">compra!</span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Tu Planner Digital Personalizado está siendo creado especialmente para ti
+              Tu pedido está siendo procesado. Te notificaremos cuando esté listo.
             </p>
           </div>
 
