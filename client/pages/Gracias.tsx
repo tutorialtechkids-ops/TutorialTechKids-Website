@@ -44,13 +44,10 @@ export default function Gracias() {
                   Me emociona mucho poder crear algo especial que te ayude a organizarte y ser más productivo.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  Tu planner está siendo generado por nuestro bot especializado con todas las especificaciones 
-                  que seleccionaste en el formulario. Recibirás tu archivo personalizado en las próximas horas 
-                  directamente en tu correo electrónico.
+                  Estamos preparando tu contenido. Recibirás una notificación por correo cuando esté listo.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  Mientras tanto, te invito a que visites nuestro canal de YouTube donde encontrarás tutoriales 
-                  sobre cómo usar tu planner digital, tips de productividad y mucho contenido tecnológico educativo.
+                  Mientras tanto, puedes visitar nuestro canal de YouTube para más tutoriales y recursos.
                 </p>
                 <p className="text-foreground font-medium">
                   ¡Gracias por ser parte de la comunidad TutorialTechKids! 🚀
