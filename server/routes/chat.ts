@@ -8,9 +8,29 @@ export const handleChat: RequestHandler = async (req, res) => {
       return res.status(400).json({ error: "Missing input in request body" });
     }
 
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return res.status(500).json({ error: "OpenAI API key not configured on the server (OPENAI_API_KEY)." });
+    const apiKey = process.env.OPENAI_API_KEY as string | undefined;
+
+    const looksLikeKey = (k?: string) => typeof k === 'string' && k.startsWith('sk-') && k.length > 30;
+
+    if (!looksLikeKey(apiKey)) {
+      // Fallback offline reply when OpenAI key is not configured or invalid
+      console.warn('/api/chat: OpenAI key missing or invalid, using local fallback. Current OPENAI_API_KEY=', apiKey);
+
+      const isSpanish = /\b(hola|gracias|por favor|pregunta|imagenes|imágenes|adiós|buenas)\b/i.test(input);
+      const greeting = isSpanish ? 'Gracias por tu mensaje. (Respuesta en modo local)' : 'Thanks for your message. (Local fallback reply)';
+      let reply = `${greeting}\n\n`;
+
+      // Very small local 'AI' that echoes and offers guidance
+      reply += isSpanish ? `Has dicho: "${input}".` : `You said: "${input}".`;
+
+      if (images && images.length) {
+        reply += isSpanish ? ` He recibido ${images.length} imagen(es).` : ` I received ${images.length} image(s).`;
+      }
+
+      reply += '\n\n';
+      reply += isSpanish ? 'Si quieres respuestas más avanzadas conecta una clave de OpenAI válida en la variable de entorno OPENAI_API_KEY.' : 'For more advanced responses, connect a valid OpenAI API key as the OPENAI_API_KEY environment variable.';
+
+      return res.status(200).json({ output: reply, warning: 'openai_key_missing' });
     }
 
     // Call OpenAI Responses API directly using fetch to avoid adding new dependencies
