@@ -77,8 +77,7 @@ export function Header() {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-center space-x-4"><Link to="/carrito" className="text-foreground hover:text-primary transition-colors"><ShoppingCart className="h-5 w-5" /></Link><button onClick={() => { setShowLogin(true); setShowMobileMenu(false); }} className="block text-foreground hover:text-primary transition-colors font-medium">{t('nav.login')}</button></div>
-                    <a href="https://www.youtube.com/@TutorialTechKids" target="_blank" rel="noopener noreferrer" className="block bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg text-center" onClick={() => setShowMobileMenu(false)}>{t('nav.start')}</a>
+                    <div className="flex items-center justify-center space-x-4"><Link to="/carrito" className="text-foreground hover:text-primary transition-colors"><ShoppingCart className="h-5 w-5" /></Link></div>
                   </div>
                 )}
               </div>
