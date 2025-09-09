@@ -35,9 +35,7 @@ export function ChatWidget() {
       const lower = text.toLowerCase();
       let reply = language === 'es' ? 'Gracias por tu mensaje. Te responderemos pronto.' : 'Thanks for your message. We will get back to you soon.';
 
-      if (lower.includes('planner') || lower.includes('planificador')) {
-        reply = language === 'es' ? 'Puedo ayudarte a personalizar un planner. ¿Quieres que te guíe paso a paso?' : 'I can help you customize a planner. Would you like a step-by-step guide?';
-      } else if (lower.includes('urgent') || lower.includes('urgente')) {
+      if (lower.includes('urgent') || lower.includes('urgente')) {
         reply = language === 'es' ? 'Si tu consulta es urgente, por favor utiliza el correo en la página de contacto para atención prioritaria.' : 'If your inquiry is urgent, please use the email on the contact page for priority support.';
       }
 
