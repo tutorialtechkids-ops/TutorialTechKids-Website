@@ -47,11 +47,17 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, name: string): Promise<boolean> => {
     try {
       // In production, this would be an API call to verify credentials
-      // For now, we'll simulate database lookup
-      const isAdminEmail = ADMIN_EMAILS.includes(email.toLowerCase());
-      
+      // For now, we'll simulate database lookup using KNOWN_EMAILS
+      const emailLower = email.toLowerCase();
+      const exists = KNOWN_EMAILS.includes(emailLower);
+      if (!exists) {
+        // Email not found
+        return false;
+      }
+
+      const isAdminEmail = ADMIN_EMAILS.includes(emailLower);
       const userData: User = {
-        email: email.toLowerCase(),
+        email: emailLower,
         name,
         role: isAdminEmail ? 'admin' : 'user',
         isAuthenticated: true
@@ -59,7 +65,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
       setUser(userData);
       localStorage.setItem('tutorialtech_user', JSON.stringify(userData));
-      
+
       return true;
     } catch (error) {
       console.error('Login error:', error);
