@@ -10,3 +10,14 @@
 export interface DemoResponse {
   message: string;
 }
+
+export interface ChatRequest {
+  input: string;
+  model?: string;
+  images?: string[];
+}
+
+export interface ChatResponse {
+  output: string;
+  error?: string;
+}
