@@ -47,24 +47,6 @@ export function Header() {
               </a>
             </div>
 
-            <div className="hidden lg:flex items-center space-x-4 absolute right-4">
-              {isAuthenticated() ? (
-                <div className="flex items-center space-x-3">
-                  {isAdmin() && (
-                    <div className="flex items-center space-x-1 bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium"><Crown className="h-4 w-4" /><span>Admin</span></div>
-                  )}
-                  <div className="flex items-center space-x-2 text-foreground"><User className="h-4 w-4" /><span className="font-medium">{user?.name}</span></div>
-                  <button onClick={logout} className="text-muted-foreground hover:text-foreground transition-colors" title="Cerrar sesión"><LogOut className="h-4 w-4" /></button>
-                  <Link to="/carrito" className="text-foreground hover:text-primary transition-colors ml-2" title="Carrito"><ShoppingCart className="h-5 w-5" /></Link>
-                </div>
-              ) : (
-                <div className="flex items-center space-x-3">
-                  <Link to="/carrito" className="text-foreground hover:text-primary transition-colors mr-2" title="Carrito"><ShoppingCart className="h-5 w-5" /></Link>
-                  <button onClick={() => setShowLogin(true)} className="text-foreground hover:text-primary transition-colors font-medium">{t('nav.login')}</button>
-                  <a href="https://www.youtube.com/@TutorialTechKids" target="_blank" rel="noopener noreferrer" className="bg-primary hover:bg-brand-blue-light text-primary-foreground px-6 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-lg">{t('nav.start')}</a>
-                </div>
-              )}
-            </div>
 
             <button onClick={() => setShowMobileMenu(!showMobileMenu)} className="lg:hidden text-foreground hover:text-primary transition-colors absolute right-4">
               {showMobileMenu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
