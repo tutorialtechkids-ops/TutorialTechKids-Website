@@ -32,11 +32,7 @@ export function Header() {
               <Link to="/contacto" className="text-foreground hover:text-primary transition-colors font-medium">{t('nav.contact')}</Link>
             </nav>
 
-            <div className="hidden lg:flex mt-3 flex items-center justify-center space-x-4 mr-8">
-              <a href="https://www.youtube.com/@TutorialTechKids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
-                <Youtube className="h-4 w-4" />
-                <span>YouTube</span>
-              </a>
+            <div className="hidden lg:flex items-center space-x-6">
               <a href="https://www.instagram.com/tutorialtechkids?igsh=a2tyeW4zdXFobGJy&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
                 <Instagram className="h-4 w-4" />
                 <span>Instagram</span>
