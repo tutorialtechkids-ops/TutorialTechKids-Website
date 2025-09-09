@@ -25,7 +25,7 @@ export function PaymentButton({ onSuccess, amount, productName }: PaymentButtonP
     setTimeout(() => {
       setIsProcessing(false);
       onSuccess();
-      alert("¡Pago procesado exitosamente! Ahora puedes personalizar tu planner.");
+      alert("¡Pago procesado exitosamente! Ahora puedes acceder a tu producto.");
     }, 2000);
   };
 
