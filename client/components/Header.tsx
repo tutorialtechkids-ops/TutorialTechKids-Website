@@ -70,6 +70,21 @@ export function Header() {
               </nav>
 
               <div className="border-t border-border pt-4">
+                <div className="flex items-center justify-center space-x-4 mb-4">
+                  <a href="https://www.instagram.com/tutorialtechkids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+                    <Instagram className="h-4 w-4" />
+                    <span>Instagram</span>
+                  </a>
+                  <a href="https://www.threads.net/@tutorialtechkids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+                    <AtSign className="h-4 w-4" />
+                    <span>Threads</span>
+                  </a>
+                  <a href="https://whatsapp.com/channel/0029VaTutorialTechKids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+                    <MessageCircle className="h-4 w-4" />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+
                 {isAuthenticated() ? (
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2 text-foreground"><User className="h-4 w-4" /><span className="font-medium">{user?.name}</span>{isAdmin() && (<div className="flex items-center space-x-1 bg-accent/10 text-accent px-2 py-1 rounded-full text-xs font-medium"><Crown className="h-3 w-3" /><span>Admin</span></div>)}</div>
