@@ -113,7 +113,7 @@ export default function RedesSociales() {
           </div>
 
           {/* Call to Action */}
-          <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-8">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-8">
             <div className="text-center space-y-4">
               <h3 className="text-2xl font-bold text-foreground">
                 ¿Tienes alguna sugerencia para nuestros videos?
@@ -128,7 +128,13 @@ export default function RedesSociales() {
                 <span>Contáctanos</span>
               </a>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Bible verse block */}
+          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mt-8 bg-yellow-50 border border-yellow-100 rounded-2xl p-6 text-center">
+            <p className="text-lg italic text-foreground/90">“Todo lo puedo en Cristo que me fortalece.”</p>
+            <div className="mt-3 text-sm font-semibold text-muted-foreground">— Filipenses 4:13</div>
+          </motion.div>
         </div>
       </div>
     </main>
