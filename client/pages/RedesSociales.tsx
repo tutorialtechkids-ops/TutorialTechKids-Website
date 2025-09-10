@@ -30,16 +30,40 @@ export default function RedesSociales() {
               </div>
               
               {/* Content */}
-              <div className="space-y-6">
+              <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-6">
                 <h2 className="text-3xl font-bold text-foreground">
                   Canal de YouTube TutorialTechKids
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  Nuestro canal principal donde publicamos tutoriales paso a paso, explicaciones tecnológicas 
-                  fáciles de entender y contenido educativo que ayuda a niños y jóvenes a aprender tecnología 
+                  Nuestro canal principal donde publicamos tutoriales paso a paso, explicaciones tecnológicas
+                  fáciles de entender y contenido educativo que ayuda a niños y jóvenes a aprender tecnología
                   de forma divertida y práctica.
                 </p>
-              </div>
+              </motion.div>
+
+              {/* Social icons row */}
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="flex items-center justify-center space-x-6 my-6">
+                <a href="https://www.instagram.com/tutorialtechkids" target="_blank" rel="noopener noreferrer" className="flex items-center flex-col text-center text-foreground hover:text-primary transition-colors">
+                  <div className="bg-gradient-to-br from-pink-500 to-yellow-400 p-4 rounded-2xl shadow-md flex items-center justify-center w-16 h-16">
+                    <Instagram className="h-6 w-6 text-white" />
+                  </div>
+                  <span className="mt-2 text-sm">Instagram</span>
+                </a>
+
+                <a href="https://www.threads.net/@tutorialtechkids" target="_blank" rel="noopener noreferrer" className="flex items-center flex-col text-center text-foreground hover:text-primary transition-colors">
+                  <div className="bg-gray-900 p-4 rounded-2xl shadow-md flex items-center justify-center w-16 h-16">
+                    <AtSign className="h-6 w-6 text-white" />
+                  </div>
+                  <span className="mt-2 text-sm">Threads</span>
+                </a>
+
+                <a href="https://whatsapp.com/channel/0029VaTutorialTechKids" target="_blank" rel="noopener noreferrer" className="flex items-center flex-col text-center text-foreground hover:text-primary transition-colors">
+                  <div className="bg-green-500 p-4 rounded-2xl shadow-md flex items-center justify-center w-16 h-16">
+                    <MessageCircle className="h-6 w-6 text-white" />
+                  </div>
+                  <span className="mt-2 text-sm">WhatsApp</span>
+                </a>
+              </motion.div>
 
               {/* What you'll find */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-12">
