@@ -33,15 +33,15 @@ export function Header() {
             </nav>
 
             <div className="hidden lg:flex items-center space-x-6">
-              <a href="https://www.instagram.com/tutorialtechkids?igsh=a2tyeW4zdXFobGJy&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+              <a href="https://www.instagram.com/tutorialtechkids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
                 <Instagram className="h-4 w-4" />
                 <span>Instagram</span>
               </a>
-              <a href="https://www.threads.net/@tutorialtechkids?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+              <a href="https://www.threads.net/@tutorialtechkids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
                 <AtSign className="h-4 w-4" />
                 <span>Threads</span>
               </a>
-              <a href="https://whatsapp.com/channel/0029Vb6jo6QDJ6Guhth6rS1v" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
+              <a href="https://whatsapp.com/channel/0029VaTutorialTechKids" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary text-sm inline-flex items-center space-x-2">
                 <MessageCircle className="h-4 w-4" />
                 <span>WhatsApp</span>
               </a>
