@@ -1,4 +1,5 @@
-import { Youtube, ExternalLink } from "lucide-react";
+import { Youtube, ExternalLink, Instagram, AtSign, MessageCircle } from "lucide-react";
+import { motion } from 'framer-motion';
 
 export default function RedesSociales() {
   return (
